@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+
+<BorderPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#test" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <VBox prefHeight="566.0" prefWidth="574.0" BorderPane.alignment="CENTER">
+         <children>
+            <MediaView fx:id="mvPlayer" fitHeight="480.0" fitWidth="720.0" onDragDropped="#Drop" onDragOver="#onDragOver" preserveRatio="false" />
+            <Pane>
+               <children>
+                  <Button layoutX="107.0" layoutY="4.0" mnemonicParsing="false" text="Button" />
+                  <Button layoutX="504.0" layoutY="2.0" mnemonicParsing="false" text="Button" />
+                  <Button layoutX="383.0" layoutY="2.0" mnemonicParsing="false" text="Button" />
+                  <Button layoutX="241.0" layoutY="3.0" mnemonicParsing="false" text="Button" />
+               </children>
+            </Pane>
+         </children>
+         <padding>
+            <Insets left="30.0" right="30.0" top="50.0" />
+         </padding>
+      </VBox>
+   </left>
+   <center>
+      <VBox BorderPane.alignment="CENTER" />
+   </center>
+   <right>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <TextField editable="false" prefHeight="230.0" prefWidth="593.0" style="-fx-background-color: CCCCCC;" />
+            <TextField style="-fx-background-color: E2E2E2;">
+               <VBox.margin>
+                  <Insets top="200.0" />
+               </VBox.margin>
+            </TextField>
+            <Button mnemonicParsing="false" text="Valider">
+               <VBox.margin>
+                  <Insets top="12.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+         </padding>
+      </VBox>
+   </right>
+</BorderPane>
