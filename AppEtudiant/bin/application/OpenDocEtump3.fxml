@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -19,6 +20,7 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#test" text="Close" />
+                  <MenuItem mnemonicParsing="false" onAction="#openSave" text="Save" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -41,10 +43,11 @@
             <MediaView fx:id="mvPlayer" />
             <Pane>
                <children>
-                  <Button layoutX="107.0" layoutY="4.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="playPause" layoutX="241.0" layoutY="3.0" mnemonicParsing="false" onAction="#playOrPause" text="Pause" />
+                  <Button layoutX="107.0" layoutY="4.0" mnemonicParsing="false" onAction="#gotoHelp" text="Aide" />
                   <Button layoutX="504.0" layoutY="2.0" mnemonicParsing="false" text="Button" />
                   <Button layoutX="383.0" layoutY="2.0" mnemonicParsing="false" text="Button" />
-                  <Button layoutX="241.0" layoutY="3.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="launch" layoutX="654.0" layoutY="3.0" mnemonicParsing="false" onAction="#launchsong" text="Démarrer" />
                </children>
             </Pane>
          </children>
@@ -57,7 +60,7 @@
       <VBox BorderPane.alignment="CENTER" />
    </center>
    <right>
-      <VBox BorderPane.alignment="CENTER">
+      <VBox fx:id="responsebox" BorderPane.alignment="CENTER">
          <children>
             <TextField editable="false" prefHeight="230.0" prefWidth="593.0" style="-fx-background-color: CCCCCC;" />
             <TextField style="-fx-background-color: E2E2E2;">
@@ -70,6 +73,14 @@
                   <Insets top="12.0" />
                </VBox.margin>
             </Button>
+            <Pane fx:id="help" disable="true" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <children>
+                  <TextArea editable="false" prefHeight="200.0" prefWidth="401.0" text="Aide du professeur" />
+               </children>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </Pane>
          </children>
          <padding>
             <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />

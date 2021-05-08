@@ -8,61 +8,88 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import javafx.application.Platform;
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 public class Controller implements Initializable{
 	@FXML private MediaView mvPlayer;
 	@FXML private ImageView mp3Player;
+	@FXML private TextField path;
+	@FXML private TextField fileName;
+	@FXML private TextField name;
+	@FXML private TextField firstName;
+	@FXML private Button done;
+	@FXML private Button playPause;
+	@FXML private VBox responsebox;
+	@FXML private Button launch;
+	@FXML private Pane help;
 	private MediaPlayer mp;
 	private Media me; 
+	private boolean helpopened=false;
+	
+	static private File f;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		System.out.println("Launching....");
-		
+
 	}
-	
+
 	@FXML
-	public void searchOpenFile() throws IOException {
+	public void searchFile() throws IOException {
 		System.out.println("Opening..");
 		FileChooser fc = new FileChooser();
-		fc.getExtensionFilters().add(new ExtensionFilter("Fichiers étudiants","*.txt"));
 		fc.getExtensionFilters().add(new ExtensionFilter("mp3","*.mp3"));
 		fc.getExtensionFilters().add(new ExtensionFilter("mp4","*.mp4"));
-		File f = fc.showOpenDialog(null);
-		
+		f = fc.showOpenDialog(null);
+		openFile(f);
+	}
+	private void openFile(File f) throws IOException {
 		if (f!=null) {
 			System.out.println("Selected File : "+ f.getAbsolutePath());
-			if(f.getAbsolutePath().contains(".mp4")) changeScene(FXMLLoader.load(getClass().getResource("/application/OpenDocEtu.fxml")));
-			if(f.getAbsolutePath().contains(".mp3")) changeScene(FXMLLoader.load(getClass().getResource("/application/OpenDocEtump3.fxml")));
+			if(f.getAbsolutePath().contains(".mp4")) {
+				changeScene(FXMLLoader.load(getClass().getResource("/application/OpenDocEtu.fxml")));
+				
+				
+			}
+			if(f.getAbsolutePath().contains(".mp3")) {
+				changeScene(FXMLLoader.load(getClass().getResource("/application/OpenDocEtump3.fxml")));
+			}
 		}
 	}
-	private void openFile(File f) {
-		System.out.println("Selected File : " + f.getAbsolutePath());
-	}
-	
+
 	private void changeScene (Parent root) {
 		Stage thisStage = (Stage) Main.actualRoot.getScene().getWindow();
 		Main.actualRoot=root;
 		Scene next = new Scene(root,Main.width,Main.height);
 		thisStage.setScene(next);
+		
 	}
 	@FXML
 	public void onDragOver(DragEvent event) {
@@ -71,26 +98,27 @@ public class Controller implements Initializable{
 		}
 	}
 	@FXML
-	public void Drop(DragEvent event) throws FileNotFoundException{
+	public void Drop(DragEvent event) throws IOException{
 		List<File> files = event.getDragboard().getFiles();
-		File f = files.get(0);
+		f = files.get(0);
 		System.out.println("Sélection effectuée");
-		if(f.getAbsolutePath().contains(".txt")) openFile(f);
-		else System.out.println("impossible");
-		if(f.getAbsolutePath().contains(".mp4")) launchvideo(f);
-		if(f.getAbsolutePath().contains(".mp3")) launchsong(f);
+		openFile(f);
 	}
-	private void launchsong(File f) {
+	@FXML private void launchsong() {
 		// TODO Auto-generated method stub
 		System.out.println("Entrée en mode mp3");
 		String path = f.getAbsolutePath();
 		Media m = new Media(new File(path).toURI().toString());
-		/*ObservableMap<String,Object> picinfo = m.getMetadata();
-		picinfo.entrySet().forEach(entry -> {
-		    System.out.println(entry.getKey() + " " + entry.getValue());
-		});*/
-		launchvideo(f);
-		
+		m.getMetadata().addListener(new MapChangeListener<String, Object>() {
+			@Override
+			public void onChanged(Change<? extends String, ? extends Object> ch) {
+				if (ch.wasAdded()) {
+					handleMetadata(ch.getKey(), ch.getValueAdded());
+				}
+			}
+		});
+		launchvideo();
+		launch.setVisible(false);
 	}
 
 	@FXML
@@ -102,20 +130,69 @@ public class Controller implements Initializable{
 	public void test() throws IOException {
 		changeScene(FXMLLoader.load(getClass().getResource("/application/close.fxml")));
 	}
-	
-	public void launchvideo(File f) {
+
+	public void launchvideo() {
 		String path = f.getAbsolutePath();
 		me = new Media(new File(path).toURI().toString());
 		mp = new MediaPlayer(me);
 		System.out.println("vidéo trouvée");
 		mvPlayer.setMediaPlayer(mp);
 		mp.setAutoPlay(true);
+		launch.setVisible(false);
 	}
-	
+
 	@FXML public void gotoHelp() throws IOException {
-		changeScene(FXMLLoader.load(getClass().getResource("/application/OpenDocEtuHelp.fxml")));
+		if(helpopened) {
+			help.setVisible(false);
+			responsebox.setDisable(false);
+			helpopened=false;
+		}
+		else {
+			help.setVisible(true);
+			responsebox.setDisable(true);
+			helpopened=true;
+		}
 	}
-	@FXML public void exitHelp() throws IOException{
-		changeScene(FXMLLoader.load(getClass().getResource("/application/OpenDocEtu.fxml")));
+
+
+	private void handleMetadata(String key, Object valueAdded) {
+		System.out.println("Modif Handle");
+		System.out.println(key +" | "+valueAdded);
+		if(key.equals("image"))mp3Player.setImage((Image) valueAdded);
+
+	}
+
+	@FXML public void openSave() throws IOException {
+		Parent saved = FXMLLoader.load(getClass().getResource("/application/PopupSave.fxml"));
+		Scene save = new Scene(saved);
+		Stage saving = new Stage();
+		saving.setScene(save);
+		saving.show();
+	}
+	@FXML public void choosePath() {
+		DirectoryChooser dc = new DirectoryChooser();
+		File directorysave = dc.showDialog(null);
+		path.setText(f.getAbsolutePath());
+		setDoneActive();
+	}
+	@FXML public void changeFileName() {
+		fileName.setText(name.getText()+"_"+firstName.getText()+".exo");
+		if(name.getText().trim().isEmpty() && firstName.getText().trim().isEmpty())fileName.setText("");;
+		setDoneActive();
+	}
+
+	private void setDoneActive() {
+		if (!path.getText().trim().isEmpty() && !fileName.getText().trim().isEmpty())done.setDisable(false); 
+		if(fileName.getText().trim()=="")done.setDisable(true);
+	}
+	@FXML public void playOrPause() {
+		if(mp.getStatus() == Status.PAUSED) {
+			mp.play();
+			playPause.setText("Pause");
+		}
+		else{
+			mp.pause();
+			playPause.setText("Play");
+		}
 	}
 }
