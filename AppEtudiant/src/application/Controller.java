@@ -9,16 +9,26 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Set;
+import javax.swing.Timer;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,6 +46,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.util.Duration;
 
 public class Controller implements Initializable{
 	@FXML private MediaView mvPlayer;
@@ -49,14 +60,20 @@ public class Controller implements Initializable{
 	@FXML private VBox responsebox;
 	@FXML private Button launch;
 	@FXML private Pane help;
+	@FXML private Label timer;
+	@FXML private Slider timeSlider;
+	@FXML private Slider volumeSlider;
 	private MediaPlayer mp;
 	private Media me; 
+	private Integer exotime=120;
+	private Timeline timeline;
+	private Integer timeSeconds = exotime;
 	private boolean helpopened=false;
-	
+	private boolean volumeopened=false;
+
 	static private File f;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		System.out.println("Launching....");
 
 	}
@@ -75,8 +92,8 @@ public class Controller implements Initializable{
 			System.out.println("Selected File : "+ f.getAbsolutePath());
 			if(f.getAbsolutePath().contains(".mp4")) {
 				changeScene(FXMLLoader.load(getClass().getResource("/application/OpenDocEtu.fxml")));
-				
-				
+
+
 			}
 			if(f.getAbsolutePath().contains(".mp3")) {
 				changeScene(FXMLLoader.load(getClass().getResource("/application/OpenDocEtump3.fxml")));
@@ -89,7 +106,7 @@ public class Controller implements Initializable{
 		Main.actualRoot=root;
 		Scene next = new Scene(root,Main.width,Main.height);
 		thisStage.setScene(next);
-		
+
 	}
 	@FXML
 	public void onDragOver(DragEvent event) {
@@ -105,7 +122,6 @@ public class Controller implements Initializable{
 		openFile(f);
 	}
 	@FXML private void launchsong() {
-		// TODO Auto-generated method stub
 		System.out.println("Entrée en mode mp3");
 		String path = f.getAbsolutePath();
 		Media m = new Media(new File(path).toURI().toString());
@@ -117,7 +133,7 @@ public class Controller implements Initializable{
 				}
 			}
 		});
-		launchvideo();
+		launchexo();
 		launch.setVisible(false);
 	}
 
@@ -131,14 +147,31 @@ public class Controller implements Initializable{
 		changeScene(FXMLLoader.load(getClass().getResource("/application/close.fxml")));
 	}
 
-	public void launchvideo() {
+	public void launchexo() {
 		String path = f.getAbsolutePath();
+		System.out.println(path);
 		me = new Media(new File(path).toURI().toString());
+		System.out.println(me);
 		mp = new MediaPlayer(me);
 		System.out.println("vidéo trouvée");
 		mvPlayer.setMediaPlayer(mp);
 		mp.setAutoPlay(true);
 		launch.setVisible(false);
+		timeSlider.setDisable(false);
+		volumeSlider.setDisable(false);
+		timer.setText("Temps restant : " + timeSeconds.toString()+"s");
+		handleTime();
+		//*******************************************************ICI SE TROUVENT LES FONCTIONS CHRONO et TIMER************************************//
+		//timerCreation();
+		//stopWatchCreation();
+		//*******************************************************ICI SE TROUVENT LES FONCTIONS CHRONO et TIMER************************************//
+		volumeSlider.setValue(mp.getVolume() * 100);
+		volumeSlider.valueProperty().addListener(new InvalidationListener() {
+			@Override
+			public void invalidated(Observable observable) {
+				mp.setVolume(volumeSlider.getValue()/100);
+			}
+		});
 	}
 
 	@FXML public void gotoHelp() throws IOException {
@@ -151,6 +184,16 @@ public class Controller implements Initializable{
 			help.setVisible(true);
 			responsebox.setDisable(true);
 			helpopened=true;
+		}
+	}
+	@FXML public void showVolume() throws IOException{
+		if(volumeopened) {
+			volumeSlider.setVisible(false); 
+			volumeopened=false;
+		}
+		else {
+			volumeSlider.setVisible(true);
+			volumeopened=true;
 		}
 	}
 
@@ -195,4 +238,72 @@ public class Controller implements Initializable{
 			playPause.setText("Play");
 		}
 	}
+	public void handleTime() {
+		InvalidationListener sliderChangeListener = o-> {
+			Duration seekTo = Duration.seconds(timeSlider.getValue());
+			mp.seek(seekTo);
+		};
+		timeSlider.valueProperty().addListener(sliderChangeListener);
+
+		// Link the player's time to the slider
+		mp.currentTimeProperty().addListener(l-> {
+			// Temporarily remove the listener on the slider, so it doesn't respond to the change in playback time
+			// I thought timeSlider.isValueChanging() would be useful for this, but it seems to get stuck at true
+			// if the user slides the slider instead of just clicking a position on it.
+			timeSlider.valueProperty().removeListener(sliderChangeListener);
+
+			// Keep timeText's text up to date with the slider position.
+			Duration currentTime = mp.getCurrentTime();
+			int value = (int) currentTime.toSeconds();
+			timeSlider.setValue(value);    
+
+			// Re-add the slider listener
+			timeSlider.valueProperty().addListener(sliderChangeListener);
+		});
+	}
+	public void timerCreation() {
+		timeline = new Timeline();
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.getKeyFrames().add(
+				new KeyFrame(Duration.seconds(1),
+						new EventHandler<ActionEvent>() {
+					// KeyFrame event handler
+					@Override
+					public void handle(ActionEvent arg0) {
+						timeSeconds--;
+						// update timerLabel
+						timer.setText(
+								"Temps restant : " + timeSeconds.toString()+"s");
+						if (timeSeconds <= 0) {
+							timeline.stop();
+							//TODO fermer les moyens d'écrire à la fin du timer
+						}
+					}
+				}));
+		timeline.playFromStart();
+	}
+	public void stopWatchCreation() {
+		timeSeconds=0;
+		timeline = new Timeline();
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.getKeyFrames().add(
+				new KeyFrame(Duration.seconds(1),
+						new EventHandler<ActionEvent>() {
+					// KeyFrame event handler
+					@Override
+					public void handle(ActionEvent arg0) {
+						timeSeconds++;
+						// update timerLabel
+						timer.setText(
+								"Temps restant : " + timeSeconds.toString()+"s");
+						if (helpopened) {
+							timeline.stop();
+						}
+					}
+				}));
+		timeline.playFromStart();
+	}
+	//TODO Dark mode
+	//TODO Interface plus propre
+	//TODO vérif Balsamik
 }

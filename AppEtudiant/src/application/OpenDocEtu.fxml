@@ -2,15 +2,20 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <top>
@@ -39,15 +44,30 @@
       <VBox prefHeight="566.0" prefWidth="574.0" BorderPane.alignment="CENTER">
          <children>
             <MediaView fx:id="mvPlayer" fitHeight="480.0" fitWidth="720.0" onDragDropped="#Drop" onDragOver="#onDragOver" preserveRatio="false" />
-            <Pane>
+            <Slider fx:id="timeSlider" disable="true" />
+            <Pane prefHeight="36.0" prefWidth="763.0">
                <children>
                   <Button layoutX="107.0" layoutY="4.0" mnemonicParsing="false" onAction="#gotoHelp" text="Aide" />
                   <Button layoutX="504.0" layoutY="2.0" mnemonicParsing="false" text="Button" />
                   <Button layoutX="383.0" layoutY="2.0" mnemonicParsing="false" text="Button" />
                   <Button fx:id="playPause" layoutX="241.0" layoutY="3.0" mnemonicParsing="false" onAction="#playOrPause" text="Pause" />
-                  <Button fx:id="launch" layoutX="648.0" layoutY="2.0" mnemonicParsing="false" onAction="#launchvideo" text="Démarrer" />
+                  <Button fx:id="launch" layoutX="648.0" layoutY="2.0" mnemonicParsing="false" onAction="#launchexo" prefHeight="32.0" prefWidth="75.0" style="-fx-background-color: red;" text="Démarrer" />
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="2.0" layoutY="1.0" onMouseClicked="#showVolume" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../png-clipart-computer-icons-sound-sound-logo-monochrome.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
+            <Label fx:id="timer" prefHeight="43.0" prefWidth="171.0" text="Temps restant : 00:00">
+               <VBox.margin>
+                  <Insets left="240.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Slider fx:id="volumeSlider" disable="true" orientation="VERTICAL" visible="false" />
          </children>
          <padding>
             <Insets left="30.0" right="30.0" top="50.0" />
