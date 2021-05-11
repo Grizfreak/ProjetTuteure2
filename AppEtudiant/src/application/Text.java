@@ -30,9 +30,9 @@ public class Text {
 				newWord+=text.charAt(i);
 				
 			}
-			for(String keys : wordMap.keySet()) {
+			/*for(String keys : wordMap.keySet()) {
 				System.out.println("Valeur clé :"+keys+"|valeur mot :"+wordMap.get(keys)+"|valeur fin mot :" +(keys.length()-1+wordMap.get(keys).intValue()));
-			}
+			}*/
 		}
 
 		public String getText() {
@@ -72,7 +72,7 @@ public class Text {
 				if(z<=response.length() && !response.equals(key))z++;
 			}
 			for(int j=0;j<text.length();j++) {
-				System.out.println(chars[j]);
+				/*System.out.println(chars[j]);*/
 				textCache+=chars[j];
 			}
 		}
