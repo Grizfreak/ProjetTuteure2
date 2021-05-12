@@ -30,9 +30,9 @@ public class Text {
 				newWord+=text.charAt(i);
 				
 			}
-			/*for(String keys : wordMap.keySet()) {
+			for(String keys : wordMap.keySet()) {
 				System.out.println("Valeur clé :"+keys+"|valeur mot :"+wordMap.get(keys)+"|valeur fin mot :" +(keys.length()-1+wordMap.get(keys).intValue()));
-			}*/
+			}
 		}
 
 		public String getText() {
@@ -51,9 +51,10 @@ public class Text {
 		}
 		public void searchAndReplace(String response) {
 				for(String key : wordMap.keySet()) {
-					if(key.equals(response)) {
+					if(key.equals(response)||key.equals(response+'.')||key.equals(response+'!')||key.equals(response+'?')||key.equals(response+'\'')||key.equals(response+',')) {
 						replace(key,response);
 						}
+					
 					for(int i=0;i<endouble;i++) {
 						if(key.equals(response+i)) replace(key,response);
 					}

@@ -18,6 +18,7 @@ public class test {
 			bit.searchAndReplace(response);
 			System.out.println(bit.getTextCache());
 		}
+		in.close();
 		System.out.println("Bravo tu as terminé");
 	}
 

@@ -81,13 +81,13 @@
    <right>
       <VBox fx:id="responsebox" BorderPane.alignment="CENTER">
          <children>
-            <TextField editable="false" prefHeight="230.0" prefWidth="593.0" style="-fx-background-color: CCCCCC;" />
-            <TextField style="-fx-background-color: E2E2E2;">
+            <TextArea fx:id="TextQuestion" prefHeight="230.0" prefWidth="593.0" style="-fx-wrap-text: true;" />
+            <TextField fx:id="response" style="-fx-background-color: E2E2E2;">
                <VBox.margin>
                   <Insets top="200.0" />
                </VBox.margin>
             </TextField>
-            <Button mnemonicParsing="false" text="Valider">
+            <Button mnemonicParsing="false" onAction="#validateInput" text="Valider">
                <VBox.margin>
                   <Insets top="12.0" />
                </VBox.margin>

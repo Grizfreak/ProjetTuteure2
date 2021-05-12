@@ -29,6 +29,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -63,6 +64,8 @@ public class Controller implements Initializable{
 	@FXML private Label timer;
 	@FXML private Slider timeSlider;
 	@FXML private Slider volumeSlider;
+	@FXML private TextArea TextQuestion;
+	@FXML private TextField response;
 	private MediaPlayer mp;
 	private Media me; 
 	private Integer exotime=120;
@@ -70,6 +73,7 @@ public class Controller implements Initializable{
 	private Integer timeSeconds = exotime;
 	private boolean helpopened=false;
 	private boolean volumeopened=false;
+	private Text text;
 
 	static private File f;
 	@Override
@@ -172,6 +176,8 @@ public class Controller implements Initializable{
 				mp.setVolume(volumeSlider.getValue()/100);
 			}
 		});
+		text = new Text("Ce discours de Kennedy est considéré comme l'un de ses meilleurs, mais aussi comme un moment fort de la guerre froide. Il avait pour but de montrer le soutien des États-Unis aux habitants de l'Allemagne de l'Ouest, et notamment aux Berlinois de l'Ouest qui vivaient dans une enclave en Allemagne de l'Est — au milieu de territoires communistes, alors délimités depuis presque deux ans par le mur de Berlin — et craignaient une possible invasion de la part des troupes du bloc soviétique. Le discours tranche avec l'attitude peu engagée et assez tiède des États-Unis au début de la crise berlinoise. ");
+		TextQuestion.setText(text.getTextCache());
 	}
 
 	@FXML public void gotoHelp() throws IOException {
@@ -215,7 +221,7 @@ public class Controller implements Initializable{
 	@FXML public void choosePath() {
 		DirectoryChooser dc = new DirectoryChooser();
 		File directorysave = dc.showDialog(null);
-		path.setText(f.getAbsolutePath());
+		path.setText(directorysave.getAbsolutePath());
 		setDoneActive();
 	}
 	@FXML public void changeFileName() {
@@ -302,6 +308,15 @@ public class Controller implements Initializable{
 					}
 				}));
 		timeline.playFromStart();
+	}
+	
+	@FXML public void validateInput() {
+		String moche = response.getText();
+		moche.trim();
+		text.searchAndReplace(moche);
+		TextQuestion.setText(text.getTextCache());
+		response.setText("");
+		
 	}
 	//TODO Dark mode
 	//TODO Interface plus propre
