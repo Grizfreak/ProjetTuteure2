@@ -44,7 +44,7 @@
       <VBox prefHeight="566.0" prefWidth="574.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="mp3Player" fitHeight="480.0" fitWidth="720.0" onDragDropped="#Drop" onDragOver="#onDragOver" pickOnBounds="true" preserveRatio="true" />
-            <Slider fx:id="timeSlider" disable="true" />
+            <Slider fx:id="timeSlider" disable="true" majorTickUnit="5.0" minorTickCount="1" />
             <MediaView fx:id="mvPlayer" />
             <Pane>
                <children>
@@ -60,7 +60,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Label fx:id="timer" prefHeight="43.0" prefWidth="171.0" text="Temps restant : 00:00">
+            <Label fx:id="timer" prefHeight="43.0" prefWidth="171.0" text="Temps restant : xxs">
                <font>
                   <Font size="18.0" />
                </font>

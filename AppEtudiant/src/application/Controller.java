@@ -246,8 +246,9 @@ public class Controller implements Initializable{
 	}
 	public void handleTime() {
 		InvalidationListener sliderChangeListener = o-> {
-			Duration seekTo = Duration.seconds(timeSlider.getValue());
+			Duration seekTo = Duration.seconds(((timeSlider.getValue())*me.getDuration().toSeconds())/timeSlider.getMax());
 			mp.seek(seekTo);
+			System.out.println(timeSlider.getValue());
 		};
 		timeSlider.valueProperty().addListener(sliderChangeListener);
 
@@ -260,7 +261,7 @@ public class Controller implements Initializable{
 
 			// Keep timeText's text up to date with the slider position.
 			Duration currentTime = mp.getCurrentTime();
-			int value = (int) currentTime.toSeconds();
+			int value = (int)((currentTime.toSeconds()*timeSlider.getMax())/me.getDuration().toSeconds());
 			timeSlider.setValue(value);    
 
 			// Re-add the slider listener
