@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.media.MediaView?>
 
@@ -11,4 +12,7 @@
    <bottom>
       <Button mnemonicParsing="false" onAction="#openFile" text="Button" BorderPane.alignment="CENTER" />
    </bottom>
+   <left>
+      <ProgressIndicator fx:id="pi" prefHeight="102.0" prefWidth="119.0" progress="0.0" BorderPane.alignment="CENTER" />
+   </left>
 </BorderPane>

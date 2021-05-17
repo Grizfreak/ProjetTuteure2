@@ -146,10 +146,6 @@ public class Controller implements Initializable{
 		Platform.exit();
 		System.out.println("Execution ended");
 	}
-	@FXML
-	public void test() throws IOException {
-		changeScene(FXMLLoader.load(getClass().getResource("/application/close.fxml")));
-	}
 
 	public void launchexo() {
 		String path = f.getAbsolutePath();
