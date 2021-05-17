@@ -2,6 +2,8 @@ package application;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
@@ -17,28 +19,39 @@ import javafx.stage.FileChooser;
 public class TestController implements Initializable{
 	@FXML private MediaView mvPlayer;
 	static private File f;
-	static private File media;
-	static private byte[] bytes;
 	static private Media me;
 	static private MediaPlayer mp;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@FXML private void openFile() throws IOException {
 		System.out.println("Opening..");
 		FileChooser fc = new FileChooser();
 		f = fc.showOpenDialog(null);
-		System.out.println(f.toURI().toString());
-		bytes = Files.readAllBytes(f.toPath());
-		for (int i=0;i<bytes.length;i++) {
-			System.out.println(bytes[i]);
+		String path = f.getAbsolutePath().toString();
+		System.out.println(path);
+		File tmpFile = File.createTempFile("video", ".mp4");
+		try {
+			int nb=0;
+			FileInputStream fis = new FileInputStream(f);
+			FileOutputStream fos = new FileOutputStream(tmpFile);
+			int octet = fis.read();
+			System.out.println(f.length());
+			while (octet != -1) {
+					fos.write(octet);
+					System.out.println(octet);
+					octet=fis.read();
+					nb++;
+			}
+			fos.close();
+			fis.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		media=File.createTempFile("media", ".mp4");
-		ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
-		me = new Media(bis.toString());
+		me= new Media(new File(path).toURI().toString());
 		mp = new MediaPlayer(me);
 		mp.setAutoPlay(true);
 		mvPlayer.setMediaPlayer(mp);
