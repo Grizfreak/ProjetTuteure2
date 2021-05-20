@@ -29,7 +29,7 @@ public class TestController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-
+		
 	}
 	@FXML private void openFile() throws IOException {
 		System.out.println("Opening..");
@@ -38,34 +38,39 @@ public class TestController implements Initializable{
 		String path = f.getAbsolutePath().toString();
 		System.out.println(path);
 		tmpFile = File.createTempFile("video", ".mp4");
+		System.out.println(tmpFile.getAbsolutePath());
 		loadAppConfigurationFile();
-		me= new Media(new File(path).toURI().toString());
+		me= new Media(new File(tmpFile.getAbsolutePath()).toURI().toString());
 		mp = new MediaPlayer(me);
 		mp.setAutoPlay(true);
 		mvPlayer.setMediaPlayer(mp);
+		tmpFile.deleteOnExit();
 	}
 	 private void loadAppConfigurationFile () {
 	        Task<Void> task = new Task<Void>() {
 	            @Override
 	            public Void call() throws InterruptedException {
 	                int max = 1000000;
+	                int nb=0;
 	                for (int i = 1; i <= max; i = i + 10) {
 	                    if (isCancelled()) {
 	                        break;
 	                    }
 	                    updateProgress(i, max);
 	                    try {
-	            			int nb=0;
+	            			//TODO réfléchir à cette immondice
 	            			FileInputStream fis = new FileInputStream(f);
 	            			FileOutputStream fos = new FileOutputStream(tmpFile);
-	            			int octet = fis.read();
-	            			System.out.println(f.length());
-	            			while (octet != -1) {
+	            			Integer octet = fis.read();
+	            			while (nb <f.length()) {
 	            					fos.write(octet);
-	            					System.out.println(octet);
+	            					/*if(octet == 58) {
+	            						System.out.println(nb+" / "+f.length());
+		            					System.out.println(octet);
+	            					}*/
 	            					octet=fis.read();
 	            					nb++;
-	            					pi.setProgress((100*nb)/f.length());
+	            					
 	            			}
 	            			fos.close();
 	            			fis.close();
@@ -76,7 +81,6 @@ public class TestController implements Initializable{
 	                return null;
 	            }
 	        };
-	        pi.progressProperty().bind(task.progressProperty());
 	        new Thread(task).start();
 	    }
 
