@@ -1,9 +1,11 @@
 package controller; 
 
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +26,7 @@ public class TestController implements Initializable{
 	static private File tmpFile;
 	static private Media me;
 	static private MediaPlayer mp;
+	int video_length;
 	@FXML private ProgressIndicator pi;
 
 	@Override
@@ -32,26 +35,61 @@ public class TestController implements Initializable{
 		
 	}
 	@FXML private void openFile() throws IOException {
+		 
 		System.out.println("Opening..");
 		FileChooser fc = new FileChooser();
 		f = fc.showOpenDialog(null);
 		String path = f.getAbsolutePath().toString();
 		System.out.println(path);
-		tmpFile = File.createTempFile("video", ".mp3");
+		tmpFile = File.createTempFile("video", ".mp4");
 		System.out.println(tmpFile.getAbsolutePath());
-		loadAppConfigurationFile();
+		
+		
+		//TODO régler fonctionnement arrièreplan CHANGER CETTE MERDE
+		FileInputStream fis = new FileInputStream(f);
+		BufferedReader bf = new BufferedReader(new FileReader(f));
+		while(bf.ready()) {
+			String bfLine=bf.readLine();
+			if(bfLine.contains("nb :")){
+				String numberOnly= bfLine.replaceAll("[^0-9]", "");
+				System.out.println(numberOnly);
+				video_length=Integer.parseInt(numberOnly);
+			}
+		}
+		fis.close();
+		FileInputStream fas = new FileInputStream(f);
+		FileOutputStream fos = new FileOutputStream(tmpFile);
+		int octet = fas.read();
+		int nb=0;
+		while (nb <= video_length) {
+				fos.write(octet);
+				/*if(octet == 58) {
+					System.out.println(nb+" / "+f.length());
+					System.out.println(octet);
+				}*/
+				System.out.println(nb);
+				octet=fas.read();
+				nb++;
+				
+		}
+		System.out.println("file used");
+		fos.close();
+		fas.close();
+		
 		me= new Media(new File(tmpFile.getAbsolutePath()).toURI().toString());
 		mp = new MediaPlayer(me);
 		mp.setAutoPlay(true);
 		mvPlayer.setMediaPlayer(mp);
 		tmpFile.deleteOnExit();
 	}
-	 private void loadAppConfigurationFile () {
+	
+
+	 /*private void loadAppConfigurationFile () {
 	        Task<Void> task = new Task<Void>() {
 	            @Override
 	            public Void call() throws InterruptedException {
 	                int max = 1000000;
-	                int nb=0;
+	               
 	                for (int i = 1; i <= max; i = i + 10) {
 	                    if (isCancelled()) {
 	                        break;
@@ -60,22 +98,33 @@ public class TestController implements Initializable{
 	                    try {
 	            			//TODO réfléchir à cette immondice
 	            			FileInputStream fis = new FileInputStream(f);
+	            			BufferedReader bf = new BufferedReader(new FileReader(f));
+	            			while(bf.ready()) {
+	            				String bfLine=bf.readLine();
+	            				if(bfLine.contains("nb :")){
+	            					String numberOnly= bfLine.replaceAll("[^0-9]", "");
+	            					System.out.println(numberOnly);
+	            					video_length=Integer.parseInt(numberOnly);
+	            				}
+	            			}
+	            			fis.close();
+	            			FileInputStream fas = new FileInputStream(f);
 	            			FileOutputStream fos = new FileOutputStream(tmpFile);
-	            			int octet = fis.read();
-	            			while (octet != -1) {
+	            			int octet = fas.read();
+	            			while (nb <= video_length) {
 	            					fos.write(octet);
 	            					/*if(octet == 58) {
 	            						System.out.println(nb+" / "+f.length());
 		            					System.out.println(octet);
-	            					}*/
-	            					octet=fis.read();
+	            					}
+	            					System.out.println(nb);
+	            					octet=fas.read();
 	            					nb++;
-	            					i=max+1;
 	            					
 	            			}
 	            			System.out.println("file used");
 	            			fos.close();
-	            			fis.close();
+	            			fas.close();
 	            		} catch (IOException e) {
 	            			e.printStackTrace();
 	            		}
@@ -84,6 +133,6 @@ public class TestController implements Initializable{
 	            }
 	        };
 	        new Thread(task).start();
-	    }
+	    }*/
 
 }
