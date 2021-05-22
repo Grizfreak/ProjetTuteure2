@@ -23,6 +23,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 public class MenuController implements Initializable {
 	public static File f;
+	public static boolean ismp3=false;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -41,6 +42,7 @@ public class MenuController implements Initializable {
 		while(bf.ready()) {
 			if(bf.readLine().contains("ID3")) {
 				Parent root = FXMLLoader.load(getClass().getResource("/view/OpenDocEtump3.fxml"));
+				ismp3=true;
 				changeScene(root);
 				return;
 			}

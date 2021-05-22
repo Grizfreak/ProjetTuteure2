@@ -1,6 +1,10 @@
 package controller;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -57,32 +61,63 @@ public class MediaController implements Initializable {
 	private boolean volumeopened=false;
 	private Text text;
 	private File f;
+	private File tmpFile;
+	private int mediaLength;
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+	public void initialize(URL arg0, ResourceBundle arg1){
 		f=MenuController.f;
-	}
-
-	@FXML private void launchsong() {
-		System.out.println("Entrée en mode mp3");
-		String path = f.getAbsolutePath();
-		Media m = new Media(new File(path).toURI().toString());
-		m.getMetadata().addListener(new MapChangeListener<String, Object>() {
-			@Override
-			public void onChanged(Change<? extends String, ? extends Object> ch) {
-				if (ch.wasAdded()) {
-					handleMetadata(ch.getKey(), ch.getValueAdded());
-				}
+		//TODO GENERATE TEXT AVEC UNE FONCTION EMBARQUEE
+		if(MenuController.ismp3)
+			try {
+				tmpFile = File.createTempFile("media", ".mp3");
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		});
-		launchexo();
-		launch.setVisible(false);
+		else
+			try {
+				tmpFile = File.createTempFile("media", ".mp4");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		tmpFile.deleteOnExit();
 	}
 
-	public void launchexo() {
-		String path = f.getAbsolutePath();
+	public void launchexo() throws IOException {
+		FileInputStream fis = new FileInputStream(f);
+		BufferedReader bf = new BufferedReader(new FileReader(f));
+		while(bf.ready()) {
+			String bfLine=bf.readLine();
+			if(bfLine.contains("nb :")){
+				String numberOnly= bfLine.replaceAll("[^0-9]", "");
+				System.out.println(numberOnly);
+				mediaLength=Integer.parseInt(numberOnly);
+			}
+		}
+		fis.close();
+		FileInputStream fas = new FileInputStream(f);
+		FileOutputStream fos = new FileOutputStream(tmpFile);
+		int octet = fas.read();
+		int nb=0;
+		while (nb <= mediaLength) {
+				fos.write(octet);
+				System.out.println(nb);
+				octet=fas.read();
+				nb++;
+				
+		}
+		String path = tmpFile.getAbsolutePath();
 		System.out.println(path);
 		me = new Media(new File(path).toURI().toString());
+		if(MenuController.ismp3) {
+			me.getMetadata().addListener(new MapChangeListener<String, Object>() {
+				@Override
+				public void onChanged(Change<? extends String, ? extends Object> ch) {
+					if (ch.wasAdded()) {
+						handleMetadata(ch.getKey(), ch.getValueAdded());
+					}
+				}
+			});
+		}
 		System.out.println(me);
 		mp = new MediaPlayer(me);
 		System.out.println("vidéo trouvée");
@@ -238,6 +273,6 @@ public class MediaController implements Initializable {
 	}
 	//TODO Dark mode
 	//TODO Interface plus propre
-	//TODO vérif Balsamik*/
+	//TODO vérif Balsamik
 
 }
