@@ -1,25 +1,19 @@
-package application;
+package controller;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Set;
-import javax.swing.Timer;
-
+import ExerciseGestion.Text;
+import application.Main;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.MapChangeListener;
-import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +28,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -44,9 +40,7 @@ import javafx.scene.media.MediaView;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.util.Duration;
 
 public class Controller implements Initializable{
@@ -79,7 +73,6 @@ public class Controller implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println("Launching....");
-
 	}
 
 	@FXML
@@ -95,12 +88,12 @@ public class Controller implements Initializable{
 		if (f!=null) {
 			System.out.println("Selected File : "+ f.getAbsolutePath());
 			if(f.getAbsolutePath().contains(".mp4")) {
-				changeScene(FXMLLoader.load(getClass().getResource("/application/OpenDocEtu.fxml")));
+				changeScene(FXMLLoader.load(getClass().getResource("/view/OpenDocEtu.fxml")));
 
 
 			}
 			if(f.getAbsolutePath().contains(".mp3")) {
-				changeScene(FXMLLoader.load(getClass().getResource("/application/OpenDocEtump3.fxml")));
+				changeScene(FXMLLoader.load(getClass().getResource("/view/OpenDocEtump3.fxml")));
 			}
 		}
 	}
@@ -161,6 +154,10 @@ public class Controller implements Initializable{
 		volumeSlider.setDisable(false);
 		timer.setText("Temps restant : " + timeSeconds.toString()+"s");
 		handleTime();
+		response.addEventFilter(KeyEvent.ANY, keyEvent -> {
+			System.out.println(keyEvent);
+			if(keyEvent.getCode() == KeyCode.ENTER)validateInput();
+		});
 		//*******************************************************ICI SE TROUVENT LES FONCTIONS CHRONO et TIMER************************************//
 		//timerCreation();
 		//stopWatchCreation();
@@ -208,7 +205,7 @@ public class Controller implements Initializable{
 	}
 
 	@FXML public void openSave() throws IOException {
-		Parent saved = FXMLLoader.load(getClass().getResource("/application/PopupSave.fxml"));
+		Parent saved = FXMLLoader.load(getClass().getResource("/view/PopupSave.fxml"));
 		Scene save = new Scene(saved);
 		Stage saving = new Stage();
 		saving.setScene(save);

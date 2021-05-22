@@ -11,16 +11,16 @@ import javafx.scene.Scene;
 
 
 public class Main extends Application {
-	static Parent actualRoot;
-	static double width;
-	static double height;
+	public static Parent actualRoot;
+	public static double width;
+	public static double height;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			Rectangle2D screenBounds = Screen.getPrimary().getBounds();
 			width=screenBounds.getWidth();
 			height=screenBounds.getHeight();
-			Parent root = FXMLLoader.load(getClass().getResource("/application/AppEtu.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/view/AppEtu.fxml"));
 			actualRoot=root;
 			Scene scene = new Scene(root,width,height);
 			primaryStage.setScene(scene);

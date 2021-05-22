@@ -17,7 +17,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+<BorderPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -43,17 +43,16 @@
    <left>
       <VBox prefHeight="566.0" prefWidth="574.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="mp3Player" fitHeight="480.0" fitWidth="720.0" onDragDropped="#Drop" onDragOver="#onDragOver" pickOnBounds="true" preserveRatio="true" />
+            <MediaView fx:id="mvPlayer" fitHeight="480.0" fitWidth="720.0" onDragDropped="#Drop" onDragOver="#onDragOver" preserveRatio="false" />
             <Slider fx:id="timeSlider" disable="true" majorTickUnit="5.0" minorTickCount="1" />
-            <MediaView fx:id="mvPlayer" />
-            <Pane>
+            <Pane prefHeight="36.0" prefWidth="763.0">
                <children>
-                  <Button fx:id="playPause" layoutX="241.0" layoutY="3.0" mnemonicParsing="false" onAction="#playOrPause" text="Pause" />
                   <Button layoutX="107.0" layoutY="4.0" mnemonicParsing="false" onAction="#gotoHelp" text="Aide" />
                   <Button layoutX="504.0" layoutY="2.0" mnemonicParsing="false" text="Button" />
                   <Button layoutX="383.0" layoutY="2.0" mnemonicParsing="false" text="Button" />
-                  <Button fx:id="launch" layoutX="654.0" layoutY="3.0" mnemonicParsing="false" onAction="#launchsong" style="-fx-background-color: red;" text="Démarrer" />
-                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="-6.0" onMouseClicked="#showVolume" pickOnBounds="true" preserveRatio="true">
+                  <Button fx:id="playPause" layoutX="241.0" layoutY="3.0" mnemonicParsing="false" onAction="#playOrPause" text="Pause" />
+                  <Button fx:id="launch" layoutX="648.0" layoutY="2.0" mnemonicParsing="false" onAction="#launchexo" prefHeight="32.0" prefWidth="75.0" style="-fx-background-color: red;" text="Démarrer" />
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="2.0" layoutY="1.0" onMouseClicked="#showVolume" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../png-clipart-computer-icons-sound-sound-logo-monochrome.png" />
                      </image>
@@ -61,12 +60,12 @@
                </children>
             </Pane>
             <Label fx:id="timer" prefHeight="43.0" prefWidth="171.0" text="Temps restant : xxs">
-               <font>
-                  <Font size="18.0" />
-               </font>
                <VBox.margin>
                   <Insets left="240.0" />
                </VBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
             </Label>
             <Slider fx:id="volumeSlider" disable="true" orientation="VERTICAL" visible="false" />
          </children>
