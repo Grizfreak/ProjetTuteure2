@@ -15,7 +15,7 @@ public class TestorApp extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/application/Test.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/view/Test.fxml"));
 			actualRoot=root;
 			Scene scene = new Scene(root,width,height);
 			primaryStage.setScene(scene);

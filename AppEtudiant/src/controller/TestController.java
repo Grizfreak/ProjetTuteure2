@@ -37,7 +37,7 @@ public class TestController implements Initializable{
 		f = fc.showOpenDialog(null);
 		String path = f.getAbsolutePath().toString();
 		System.out.println(path);
-		tmpFile = File.createTempFile("video", ".mp4");
+		tmpFile = File.createTempFile("video", ".mp3");
 		System.out.println(tmpFile.getAbsolutePath());
 		loadAppConfigurationFile();
 		me= new Media(new File(tmpFile.getAbsolutePath()).toURI().toString());
@@ -61,8 +61,8 @@ public class TestController implements Initializable{
 	            			//TODO réfléchir à cette immondice
 	            			FileInputStream fis = new FileInputStream(f);
 	            			FileOutputStream fos = new FileOutputStream(tmpFile);
-	            			Integer octet = fis.read();
-	            			while (nb <f.length()) {
+	            			int octet = fis.read();
+	            			while (octet != -1) {
 	            					fos.write(octet);
 	            					/*if(octet == 58) {
 	            						System.out.println(nb+" / "+f.length());
@@ -70,8 +70,10 @@ public class TestController implements Initializable{
 	            					}*/
 	            					octet=fis.read();
 	            					nb++;
+	            					i=max+1;
 	            					
 	            			}
+	            			System.out.println("file used");
 	            			fos.close();
 	            			fis.close();
 	            		} catch (IOException e) {
