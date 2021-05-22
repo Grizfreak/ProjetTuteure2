@@ -23,7 +23,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#test" text="Close" />
+              <MenuItem mnemonicParsing="false" text="Close" />
                   <MenuItem mnemonicParsing="false" onAction="#openSave" text="Save" />
             </items>
           </Menu>
@@ -43,7 +43,7 @@
    <left>
       <VBox prefHeight="566.0" prefWidth="574.0" BorderPane.alignment="CENTER">
          <children>
-            <MediaView fx:id="mvPlayer" fitHeight="480.0" fitWidth="720.0" onDragDropped="#Drop" onDragOver="#onDragOver" preserveRatio="false" />
+            <MediaView fx:id="mvPlayer" fitHeight="480.0" fitWidth="720.0" preserveRatio="false" />
             <Slider fx:id="timeSlider" disable="true" majorTickUnit="5.0" minorTickCount="1" />
             <Pane prefHeight="36.0" prefWidth="763.0">
                <children>

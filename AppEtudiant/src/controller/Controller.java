@@ -68,56 +68,18 @@ public class Controller implements Initializable{
 	private boolean helpopened=false;
 	private boolean volumeopened=false;
 	private Text text;
-
-	static private File f;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println("Launching....");
 	}
-
-	@FXML
-	public void searchFile() throws IOException {
-		System.out.println("Opening..");
-		FileChooser fc = new FileChooser();
-		fc.getExtensionFilters().add(new ExtensionFilter("mp3","*.mp3"));
-		fc.getExtensionFilters().add(new ExtensionFilter("mp4","*.mp4"));
-		f = fc.showOpenDialog(null);
-		openFile(f);
-	}
-	private void openFile(File f) throws IOException {
-		if (f!=null) {
-			System.out.println("Selected File : "+ f.getAbsolutePath());
-			if(f.getAbsolutePath().contains(".mp4")) {
-				changeScene(FXMLLoader.load(getClass().getResource("/view/OpenDocEtu.fxml")));
-
-
-			}
-			if(f.getAbsolutePath().contains(".mp3")) {
-				changeScene(FXMLLoader.load(getClass().getResource("/view/OpenDocEtump3.fxml")));
-			}
-		}
-	}
-
 	private void changeScene (Parent root) {
 		Stage thisStage = (Stage) Main.actualRoot.getScene().getWindow();
 		Main.actualRoot=root;
 		Scene next = new Scene(root,Main.width,Main.height);
 		thisStage.setScene(next);
-
 	}
-	@FXML
-	public void onDragOver(DragEvent event) {
-		if (event.getDragboard().hasFiles()) {
-			event.acceptTransferModes(TransferMode.ANY);
-		}
-	}
-	@FXML
-	public void Drop(DragEvent event) throws IOException{
-		List<File> files = event.getDragboard().getFiles();
-		f = files.get(0);
-		System.out.println("Sélection effectuée");
-		openFile(f);
-	}
+	
+	
 	@FXML private void launchsong() {
 		System.out.println("Entrée en mode mp3");
 		String path = f.getAbsolutePath();
@@ -133,13 +95,8 @@ public class Controller implements Initializable{
 		launchexo();
 		launch.setVisible(false);
 	}
-
-	@FXML
-	public void exit() {
-		Platform.exit();
-		System.out.println("Execution ended");
-	}
-
+	
+	
 	public void launchexo() {
 		String path = f.getAbsolutePath();
 		System.out.println(path);
