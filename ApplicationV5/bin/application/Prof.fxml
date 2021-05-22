@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="252.0" prefWidth="299.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#enreg" text="Enregistrer un exercice" />
+                  <MenuItem mnemonicParsing="false" onAction="#creer" text="Créer votre exercice" />
+                  <MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Modifier exercice" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Option">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Changer thème" />
+                  <MenuItem mnemonicParsing="false" text="Essayerla version étudiante" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Tutoriel de l'application" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <Text onMouseClicked="#creer" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer votre exercice?" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

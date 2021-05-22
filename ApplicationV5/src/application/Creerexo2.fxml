@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <top>
+      <Label text="Créer votre exercice" textAlignment="CENTER" underline="true" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="44.0" prefWidth="414.0" spacing="20.0">
+               <children>
+                  <ImageView fitHeight="36.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Image/folder.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="31.0" prefWidth="151.0" text="Nom de l'exercice" underline="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="nom" prefHeight="30.0" prefWidth="105.0" />
+                  <ImageView fitHeight="35.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../../Image/%23.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Carcatère d'occultation" underline="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="carocc" editable="false" prefHeight="30.0" prefWidth="30.0" text="#" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <CheckBox fx:id="eval" mnemonicParsing="false" onAction="#checkEvaluation" text="Evaluation">
+                     <HBox.margin>
+                        <Insets left="60.0" />
+                     </HBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="time" mnemonicParsing="false" onAction="#checktime" text="Time:">
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                  </CheckBox>
+                  <TextField fx:id="min2" onAction="#clavier" onKeyTyped="#clavier" prefHeight="30.0" prefWidth="30.0" text="15" visible="false" />
+                  <Text fx:id="deb" strokeType="OUTSIDE" strokeWidth="0.0" text="min" visible="false">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextField fx:id="sec2" onAction="#clavier" onKeyTyped="#clavier" prefHeight="30.0" prefWidth="30.0" text="00" visible="false" />
+                  <CheckBox fx:id="solution" mnemonicParsing="false" text="Afficher solution">
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                  </CheckBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="42.0" prefWidth="779.0" spacing="20.0">
+               <children>
+                  <ImageView fitHeight="36.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Image/file.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="31.0" prefWidth="212.0" text="L'aide pour les étudiants" underline="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="241.0" prefWidth="779.0">
+               <children>
+                  <TextArea fx:id="texte" prefHeight="198.0" prefWidth="779.0" text="Votre texte..." />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="100.0">
+               <children>
+                  <CheckBox fx:id="casseText" mnemonicParsing="false" text="Sévérité de la casse du texte" />
+                  <CheckBox fx:id="afficheRaport" mnemonicParsing="false" text="Afficher le rapport" />
+                  <CheckBox fx:id="remplacementPartiel" mnemonicParsing="false" text="Autoriser le remplacement partiel d'un mot" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox alignment="BOTTOM_RIGHT" onKeyTyped="#clavier" prefHeight="49.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#arriere" prefHeight="26.0" prefWidth="58.0" text="Arrière">
+               <HBox.margin>
+                  <Insets right="690.0" />
+               </HBox.margin>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#save" prefHeight="26.0" prefWidth="58.0" text="Créer" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
