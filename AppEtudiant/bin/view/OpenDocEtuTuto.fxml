@@ -17,7 +17,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#test" text="Close" />
+              <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -36,7 +36,7 @@
    <left>
       <VBox prefHeight="566.0" prefWidth="574.0" BorderPane.alignment="CENTER">
          <children>
-            <MediaView fx:id="mvPlayer" fitHeight="480.0" fitWidth="720.0" onDragDropped="#Drop" onDragOver="#onDragOver" preserveRatio="false" />
+            <MediaView fx:id="mvPlayer" fitHeight="480.0" fitWidth="720.0" preserveRatio="false" />
             <Pane>
                <children>
                   <Button layoutX="107.0" layoutY="4.0" mnemonicParsing="false" text="Button" />
@@ -57,8 +57,13 @@
    <right>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <TextField editable="false" prefHeight="454.0" prefWidth="593.0" style="-fx-background-color: CCCCCC;" />
-            <Button mnemonicParsing="false" onAction="#exitHelp" text="Valider">
+            <TextField editable="false" prefHeight="230.0" prefWidth="593.0" style="-fx-background-color: CCCCCC;" />
+            <TextField style="-fx-background-color: E2E2E2;">
+               <VBox.margin>
+                  <Insets top="200.0" />
+               </VBox.margin>
+            </TextField>
+            <Button mnemonicParsing="false" text="Valider">
                <VBox.margin>
                   <Insets top="12.0" />
                </VBox.margin>
