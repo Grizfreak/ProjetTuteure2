@@ -77,10 +77,10 @@ public class Controller implements Initializable{
 		Main.actualRoot=root;
 		Scene next = new Scene(root,Main.width,Main.height);
 		thisStage.setScene(next);
-	}
 	
 	
-	@FXML private void launchsong() {
+	
+	/*@FXML private void launchsong() {
 		System.out.println("Entrée en mode mp3");
 		String path = f.getAbsolutePath();
 		Media m = new Media(new File(path).toURI().toString());
@@ -94,10 +94,10 @@ public class Controller implements Initializable{
 		});
 		launchexo();
 		launch.setVisible(false);
-	}
+	}*/
 	
 	
-	public void launchexo() {
+	/*public void launchexo() {
 		String path = f.getAbsolutePath();
 		System.out.println(path);
 		me = new Media(new File(path).toURI().toString());
@@ -114,7 +114,7 @@ public class Controller implements Initializable{
 		response.addEventFilter(KeyEvent.ANY, keyEvent -> {
 			System.out.println(keyEvent);
 			if(keyEvent.getCode() == KeyCode.ENTER)validateInput();
-		});
+		});*/
 		//*******************************************************ICI SE TROUVENT LES FONCTIONS CHRONO et TIMER************************************//
 		//timerCreation();
 		//stopWatchCreation();
