@@ -48,8 +48,8 @@
             <Pane prefHeight="36.0" prefWidth="763.0">
                <children>
                   <Button layoutX="107.0" layoutY="4.0" mnemonicParsing="false" onAction="#gotoHelp" text="Aide" />
-                  <Button layoutX="504.0" layoutY="2.0" mnemonicParsing="false" text="Button" />
-                  <Button layoutX="383.0" layoutY="2.0" mnemonicParsing="false" text="Button" />
+                  <Button layoutX="504.0" layoutY="2.0" mnemonicParsing="false" onAction="#skip10sec" text="Button" />
+                  <Button layoutX="383.0" layoutY="2.0" mnemonicParsing="false" onAction="#return10sec" text="Button" />
                   <Button fx:id="playPause" layoutX="241.0" layoutY="3.0" mnemonicParsing="false" onAction="#playOrPause" text="Pause" />
                   <Button fx:id="launch" layoutX="648.0" layoutY="2.0" mnemonicParsing="false" onAction="#launchexo" prefHeight="32.0" prefWidth="75.0" style="-fx-background-color: red;" text="Démarrer" />
                   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="2.0" layoutY="1.0" onMouseClicked="#showVolume" pickOnBounds="true" preserveRatio="true">

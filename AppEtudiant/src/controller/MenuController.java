@@ -41,8 +41,8 @@ public class MenuController implements Initializable {
 		BufferedReader bf = new BufferedReader(new FileReader(f));
 		while(bf.ready()) {
 			if(bf.readLine().contains("ID3")) {
-				Parent root = FXMLLoader.load(getClass().getResource("/view/OpenDocEtump3.fxml"));
 				ismp3=true;
+				Parent root = FXMLLoader.load(getClass().getResource("/view/OpenDocEtump3.fxml"));
 				changeScene(root);
 				return;
 			}

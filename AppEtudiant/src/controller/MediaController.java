@@ -3,6 +3,7 @@ package controller;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -59,6 +60,7 @@ public class MediaController implements Initializable {
 	private Integer timeSeconds = exotime;
 	private boolean helpopened=false;
 	private boolean volumeopened=false;
+	private String textoread;
 	private Text text;
 	private File f;
 	private File tmpFile;
@@ -67,19 +69,20 @@ public class MediaController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1){
 		f=MenuController.f;
 		//TODO GENERATE TEXT AVEC UNE FONCTION EMBARQUEE
-		if(MenuController.ismp3)
-			try {
+		try {
+			if(MenuController.ismp3) {
 				tmpFile = File.createTempFile("media", ".mp3");
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
-		else
-			try {
+			else {
 				tmpFile = File.createTempFile("media", ".mp4");
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
-		tmpFile.deleteOnExit();
+			tmpFile.deleteOnExit();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void launchexo() throws IOException {
@@ -92,6 +95,9 @@ public class MediaController implements Initializable {
 				System.out.println(numberOnly);
 				mediaLength=Integer.parseInt(numberOnly);
 			}
+			if(bfLine.contains("TextOcculte:")) {
+				textoread=bfLine.substring(13);
+			}
 		}
 		fis.close();
 		FileInputStream fas = new FileInputStream(f);
@@ -99,11 +105,11 @@ public class MediaController implements Initializable {
 		int octet = fas.read();
 		int nb=0;
 		while (nb <= mediaLength) {
-				fos.write(octet);
-				System.out.println(nb);
-				octet=fas.read();
-				nb++;
-				
+			fos.write(octet);
+			System.out.println(nb);
+			octet=fas.read();
+			nb++;
+
 		}
 		String path = tmpFile.getAbsolutePath();
 		System.out.println(path);
@@ -143,7 +149,8 @@ public class MediaController implements Initializable {
 				mp.setVolume(volumeSlider.getValue()/100);
 			}
 		});
-		text = new Text("Ce discours de Kennedy est considéré comme l'un de ses meilleurs, mais aussi comme un moment fort de la guerre froide. Il avait pour but de montrer le soutien des États-Unis aux habitants de l'Allemagne de l'Ouest, et notamment aux Berlinois de l'Ouest qui vivaient dans une enclave en Allemagne de l'Est — au milieu de territoires communistes, alors délimités depuis presque deux ans par le mur de Berlin — et craignaient une possible invasion de la part des troupes du bloc soviétique. Le discours tranche avec l'attitude peu engagée et assez tiède des États-Unis au début de la crise berlinoise. ");
+		//text = new Text("Ce discours de Kennedy est considéré comme l'un de ses meilleurs, mais aussi comme un moment fort de la guerre froide. Il avait pour but de montrer le soutien des États-Unis aux habitants de l'Allemagne de l'Ouest, et notamment aux Berlinois de l'Ouest qui vivaient dans une enclave en Allemagne de l'Est — au milieu de territoires communistes, alors délimités depuis presque deux ans par le mur de Berlin — et craignaient une possible invasion de la part des troupes du bloc soviétique. Le discours tranche avec l'attitude peu engagée et assez tiède des États-Unis au début de la crise berlinoise. ");
+		text = new Text(textoread);
 		TextQuestion.setText(text.getTextCache());
 	}
 
@@ -270,6 +277,12 @@ public class MediaController implements Initializable {
 		TextQuestion.setText(text.getTextCache());
 		response.setText("");
 
+	}
+	@FXML private void return10sec() {
+		mp.seek(mp.getCurrentTime().subtract(Duration.seconds(10)));
+	}
+	@FXML private void skip10sec() {
+		mp.seek(mp.getCurrentTime().add(Duration.seconds(10)));
 	}
 	//TODO Dark mode
 	//TODO Interface plus propre
