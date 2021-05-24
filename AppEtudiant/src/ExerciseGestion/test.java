@@ -6,7 +6,7 @@ public class test {
 	public static void main(String[] args) {
 		String response;	
 		Scanner in = new Scanner(System.in);
-		Text bit = new Text("Ce discours de Kennedy est considéré comme l'un de ses meilleurs, mais aussi comme un moment fort de la guerre froide. Il avait pour but de montrer le soutien des États-Unis aux habitants de l'Allemagne de l'Ouest, et notamment aux Berlinois de l'Ouest qui vivaient dans une enclave en Allemagne de l'Est — au milieu de territoires communistes, alors délimités depuis presque deux ans par le mur de Berlin — et craignaient une possible invasion de la part des troupes du bloc soviétique. Le discours tranche avec l'attitude peu engagée et assez tiède des États-Unis au début de la crise berlinoise. ");
+		Text bit = new Text("Ce discours de Kennedy est considéré comme l'un de ses meilleurs., mais aussi comme un moment fort de la guerre froide. Il avait pour but de montrer le soutien des États-Unis aux habitants de l'Allemagne de l'Ouest, et notamment aux Berlinois de l'Ouest qui vivaient dans une enclave en Allemagne de l'Est — au milieu de territoires communistes, alors délimités depuis presque deux ans par le mur de Berlin — et craignaient une possible invasion de la part des troupes du bloc soviétique. Le discours tranche avec l'attitude peu engagée et assez tiède des États-Unis au début de la crise berlinoise. ");
 		System.out.println(bit.getText());
 		System.out.println(bit.getTextCache());
 		while(!bit.getText().equals(bit.getTextCache())) {

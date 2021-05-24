@@ -38,6 +38,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.media.MediaPlayer.Status;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -189,6 +190,7 @@ public class MediaController implements Initializable {
 		Parent saved = FXMLLoader.load(getClass().getResource("/view/PopupSave.fxml"));
 		Scene save = new Scene(saved);
 		Stage saving = new Stage();
+		saving.initModality(Modality.APPLICATION_MODAL);
 		saving.setScene(save);
 		saving.show();
 	}
