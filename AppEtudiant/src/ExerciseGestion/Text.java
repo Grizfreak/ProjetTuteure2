@@ -38,7 +38,7 @@ public class Text {
 								endouble++;
 							}
 					}*/
-				String modifiedWord = newWord.replaceAll("[^a-zA-Z\'éÉ-]", "");
+				String modifiedWord = newWord.replaceAll("[^a-zA-Z0-9\'éÉ-]", "");
 				if(!wordMap.containsKey(modifiedWord.trim()))
 					wordMap.put(modifiedWord.trim(),i-newWord.trim().length());
 				else {
@@ -97,7 +97,7 @@ public class Text {
 						if(response.charAt(j)==key.charAt(i))nb++;
 					}
 				}
-				if(nb>=3) {
+				if(nb>=3 && key.contains(response)) {
 					replace(key,response);
 				}
 				for(int i=0;i<endouble;i++) {
@@ -122,9 +122,26 @@ public class Text {
 				if(z<=response.length() && !response.equals(key))z++;
 			}
 			else {
-				//TODO bonne soirée je pleure :pensive:
+				//TODO bonne soirée je pleure :pensive: MODIFIER LES REGEX
+				String keyz="";
+				if(key.matches("\\d+")) {
+					keyz=key;
+				}
+				else if(key.matches(".*[0-9][0-9]")) {
+					keyz = key.substring(0, key.length()-2);
+				}
+				else if (key.matches(".*[0-9]")) {
+					keyz = key.substring(0,key.length()-1);
+				}
+				
+				else {
+					keyz=key;
+				}
+				if(z==keyz.length()) break;
+				chars[i]=keyz.charAt(z);
+				z++;
+				
 			}
-
 		}
 		for(int j=0;j<text.length();j++) {
 			/*System.out.println(chars[j]);*/
