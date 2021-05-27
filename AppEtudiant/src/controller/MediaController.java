@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import ExerciseGestion.Text;
+import ExerciseGestion.OculText;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.InvalidationListener;
@@ -62,7 +62,7 @@ public class MediaController implements Initializable {
 	private boolean helpopened=false;
 	private boolean volumeopened=false;
 	private String textoread;
-	private Text text;
+	private OculText text;
 	private File f;
 	private File tmpFile;
 	private int mediaLength;
@@ -151,7 +151,7 @@ public class MediaController implements Initializable {
 			}
 		});
 		//text = new Text("Ce discours de Kennedy est considéré comme l'un de ses meilleurs, mais aussi comme un moment fort de la guerre froide. Il avait pour but de montrer le soutien des États-Unis aux habitants de l'Allemagne de l'Ouest, et notamment aux Berlinois de l'Ouest qui vivaient dans une enclave en Allemagne de l'Est — au milieu de territoires communistes, alors délimités depuis presque deux ans par le mur de Berlin — et craignaient une possible invasion de la part des troupes du bloc soviétique. Le discours tranche avec l'attitude peu engagée et assez tiède des États-Unis au début de la crise berlinoise. ");
-		text = new Text(textoread);
+		text = new OculText(textoread);
 		TextQuestion.setText(text.getTextCache());
 	}
 

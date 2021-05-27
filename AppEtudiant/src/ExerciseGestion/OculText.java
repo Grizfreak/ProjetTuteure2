@@ -2,7 +2,7 @@ package ExerciseGestion;
 
 import java.util.HashMap;
 
-public class Text {
+public class OculText {
 	private String text;
 	private String textCache="";
 	private char occultation='#';
@@ -17,7 +17,7 @@ public class Text {
 	private boolean allowStat =false;
 
 
-	public Text(String text) {
+	public OculText(String text) {
 		this.text=text;
 		wordMap= new HashMap<String, Integer>();
 		createOccultedText();
