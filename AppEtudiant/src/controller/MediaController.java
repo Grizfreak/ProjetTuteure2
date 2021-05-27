@@ -286,6 +286,12 @@ public class MediaController implements Initializable {
 	@FXML private void skip10sec() {
 		mp.seek(mp.getCurrentTime().add(Duration.seconds(10)));
 	}
+	@FXML private void showSolution() {
+		response.setDisable(true);
+		TextQuestion.setText(text.getText());
+		
+		
+	}
 	//TODO Dark mode
 	//TODO Interface plus propre
 	//TODO vérif Balsamik

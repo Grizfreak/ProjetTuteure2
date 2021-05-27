@@ -12,7 +12,7 @@ public class Text {
 	//TODO remplacement partiel des mots
 	private boolean partiel =true;
 	//TODO autoriser à afficher la solution mais changer couleur dans le controller
-	private boolean allowSol = false;
+	private boolean allowSol = true;
 	//TODO autoriser à regarder ses stats
 	private boolean allowStat =false;
 
@@ -147,5 +147,13 @@ public class Text {
 			/*System.out.println(chars[j]);*/
 			textCache+=chars[j];
 		}
+	}
+
+	public boolean isAllowSol() {
+		return allowSol;
+	}
+
+	public boolean isAllowStat() {
+		return allowStat;
 	}
 }
