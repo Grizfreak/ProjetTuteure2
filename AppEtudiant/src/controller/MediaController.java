@@ -98,20 +98,22 @@ public class MediaController implements Initializable {
 			}
 			if(bfLine.contains("TextOcculte:")) {
 				textoread=bfLine.substring(13);
+				bfLine=bf.readLine();
+				while(!bfLine.contains("Caractere:")) {
+					System.out.println(textoread);
+					textoread+=" "+bfLine;
+					bfLine=bf.readLine();
+				}
 			}
 		}
 		fis.close();
 		FileInputStream fas = new FileInputStream(f);
 		FileOutputStream fos = new FileOutputStream(tmpFile);
-		int octet = fas.read();
 		int nb=0;
-		while (nb <= mediaLength) {
-			fos.write(octet);
+		byte[] bytes = fas.readNBytes(mediaLength);
+			fos.write(bytes);
 			System.out.println(nb);
-			octet=fas.read();
-			nb++;
-
-		}
+		
 		String path = tmpFile.getAbsolutePath();
 		System.out.println(path);
 		me = new Media(new File(path).toURI().toString());

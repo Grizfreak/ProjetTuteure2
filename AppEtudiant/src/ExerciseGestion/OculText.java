@@ -97,7 +97,13 @@ public class OculText {
 						if(response.charAt(j)==key.charAt(i))nb++;
 					}
 				}
-				if(nb>=3 && key.contains(response)) {
+				if(key.equals(response)) {
+					replace(key,response);
+				}
+				if(response.length()<3) {
+					return;
+				}
+				if(key.contains(response)) {
 					replace(key,response);
 				}
 				for(int i=0;i<endouble;i++) {
