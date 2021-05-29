@@ -91,8 +91,8 @@ public class MediaController implements Initializable {
 		BufferedReader bf = new BufferedReader(new FileReader(f));
 		while(bf.ready()) {
 			String bfLine=bf.readLine();
-			if(bfLine.contains("nb :")){
-				String numberOnly= bfLine.replaceAll("[^0-9]", "");
+			if(bfLine.contains("Nombre octet:")){
+				String numberOnly= bfLine.trim().replaceAll("[^0-9]", "");
 				System.out.println(numberOnly);
 				mediaLength=Integer.parseInt(numberOnly);
 			}
@@ -112,7 +112,7 @@ public class MediaController implements Initializable {
 		int nb=0;
 		byte[] bytes = fas.readNBytes(mediaLength);
 			fos.write(bytes);
-			System.out.println(nb);
+			System.out.println("g fini de lire");
 		
 		String path = tmpFile.getAbsolutePath();
 		System.out.println(path);

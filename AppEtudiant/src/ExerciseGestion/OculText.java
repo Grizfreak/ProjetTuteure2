@@ -22,6 +22,15 @@ public class OculText {
 		wordMap= new HashMap<String, Integer>();
 		createOccultedText();
 	}
+	public OculText(String text,boolean casse,boolean partiel,boolean sol,boolean stat) {
+		this.text=text;
+		wordMap= new HashMap<String, Integer>();
+		createOccultedText();
+		this.casse=casse;
+		this.partiel=partiel;
+		allowSol=sol;
+		allowStat=stat;
+	}
 
 	public void createOccultedText() {
 		String newWord="";
@@ -100,15 +109,16 @@ public class OculText {
 				if(key.equals(response)) {
 					replace(key,response);
 				}
-				if(response.length()<3) {
-					return;
-				}
-				if(key.contains(response)) {
-					replace(key,response);
-				}
 				for(int i=0;i<endouble;i++) {
-					if(nb>=3) replace(key,response);
+					if(key.equals(response+i)) replace(key,response);
 				}
+				if(key.contains(response) && response!="" && nb>=3) {
+					replace(key,response);
+					for(int i=0;i<endouble;i++) {
+						if(key.equals(response+i)) replace(key,response);
+					}
+				}
+				
 				nb=0;
 			}
 		}
