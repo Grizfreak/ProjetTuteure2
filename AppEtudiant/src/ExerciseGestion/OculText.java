@@ -5,16 +5,16 @@ import java.util.HashMap;
 public class OculText {
 	private String text;
 	private String textCache="";
+	private String aide;
 	private char occultation='#';
 	private HashMap<String, Integer> wordMap;
 	private static int endouble=0;
 	private boolean casse=true;
-	//TODO remplacement partiel des mots
 	private boolean partiel =true;
-	//TODO autoriser à afficher la solution mais changer couleur dans le controller
 	private boolean allowSol = true;
-	//TODO autoriser à regarder ses stats
 	private boolean allowStat =false;
+	//TODO autoriser à afficher la solution mais changer couleur dans le controller
+	//TODO autoriser à regarder ses stats
 
 
 	public OculText(String text) {
@@ -22,8 +22,10 @@ public class OculText {
 		wordMap= new HashMap<String, Integer>();
 		createOccultedText();
 	}
-	public OculText(String text,boolean casse,boolean partiel,boolean sol,boolean stat) {
+	public OculText(String text,String aide,char ocult,boolean casse,boolean partiel,boolean sol,boolean stat) {
 		this.text=text;
+		this.aide=aide;
+		occultation=ocult;
 		wordMap= new HashMap<String, Integer>();
 		createOccultedText();
 		this.casse=casse;

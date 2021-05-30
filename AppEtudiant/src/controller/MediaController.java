@@ -54,18 +54,26 @@ public class MediaController implements Initializable {
 	@FXML private Slider volumeSlider;
 	@FXML private TextArea TextQuestion;
 	@FXML private TextField response;
+	@FXML private TextArea aide_text;
 	private MediaPlayer mp;
 	private Media me; 
-	private Integer exotime=120;
+	private Integer minTime;
+	private Integer secTime;
 	private Timeline timeline;
-	private Integer timeSeconds = exotime;
 	private boolean helpopened=false;
 	private boolean volumeopened=false;
 	private String textoread;
+	private String aide;
 	private OculText text;
 	private File f;
 	private File tmpFile;
 	private int mediaLength;
+	private char mechar;
+	private boolean casse=false;
+	private boolean partiel =false;
+	private boolean allowSol =false;
+	private boolean allowStat =false;
+	private boolean mode_eval=false;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1){
 		f=MenuController.f;
@@ -105,15 +113,54 @@ public class MediaController implements Initializable {
 					bfLine=bf.readLine();
 				}
 			}
+			if(bfLine.contains("Caractere:")) {
+				if(!bfLine.contains("null"))
+					mechar=bfLine.charAt(12);
+			}
+			if(bfLine.contains("Eval:")) {
+				if(bfLine.contains("1"))
+					mode_eval=true;
+			}
+			if(bfLine.contains("AffichR:")) {
+				if(bfLine.contains("1"))
+					allowSol=true;
+			}
+			if(bfLine.contains("RemplacementP:")) {
+				if(bfLine.contains("1"))
+					partiel=true;
+			}
+			if(bfLine.contains("BtnSolution:")) {
+				if(bfLine.contains("1"))
+					allowSol=true;
+			}
+			if(bfLine.contains("Time:")) {
+				minTime=Integer.parseInt(bfLine.substring(6,8));
+				System.out.println(minTime);
+				if(bfLine.contains("00")) {
+					secTime=0;
+				}
+			}
+			if(bfLine.contains("Casse:")) {
+				if(bfLine.contains("1"))
+					casse=true;
+			}
+			if(bfLine.contains("aide:")) {
+				aide=bfLine.substring(6);
+				bfLine=bf.readLine();
+				while(bf.ready()) {
+					aide +=" "+bfLine;
+					bfLine=bf.readLine();
+				}
+			}
 		}
 		fis.close();
 		FileInputStream fas = new FileInputStream(f);
 		FileOutputStream fos = new FileOutputStream(tmpFile);
 		int nb=0;
 		byte[] bytes = fas.readNBytes(mediaLength);
-			fos.write(bytes);
-			System.out.println("g fini de lire");
-		
+		fos.write(bytes);
+		System.out.println("g fini de lire");
+
 		String path = tmpFile.getAbsolutePath();
 		System.out.println(path);
 		me = new Media(new File(path).toURI().toString());
@@ -135,15 +182,19 @@ public class MediaController implements Initializable {
 		launch.setVisible(false);
 		timeSlider.setDisable(false);
 		volumeSlider.setDisable(false);
-		timer.setText("Temps restant : " + timeSeconds.toString()+"s");
+		timer.setText("Temps restant : " + minTime.toString()+":"+secTime.toString()+"s");
 		handleTime();
 		response.addEventFilter(KeyEvent.ANY, keyEvent -> {
 			System.out.println(keyEvent);
 			if(keyEvent.getCode() == KeyCode.ENTER)validateInput();
 		});
 		//*******************************************************ICI SE TROUVENT LES FONCTIONS CHRONO et TIMER************************************//
-		//timerCreation();
-		//stopWatchCreation();
+		if(mode_eval) {
+			timerCreation();	
+		}
+		else {
+			stopWatchCreation();
+		}
 		//*******************************************************ICI SE TROUVENT LES FONCTIONS CHRONO et TIMER************************************//
 		volumeSlider.setValue(mp.getVolume() * 100);
 		volumeSlider.valueProperty().addListener(new InvalidationListener() {
@@ -152,7 +203,7 @@ public class MediaController implements Initializable {
 				mp.setVolume(volumeSlider.getValue()/100);
 			}
 		});
-		//text = new Text("Ce discours de Kennedy est considéré comme l'un de ses meilleurs, mais aussi comme un moment fort de la guerre froide. Il avait pour but de montrer le soutien des États-Unis aux habitants de l'Allemagne de l'Ouest, et notamment aux Berlinois de l'Ouest qui vivaient dans une enclave en Allemagne de l'Est — au milieu de territoires communistes, alors délimités depuis presque deux ans par le mur de Berlin — et craignaient une possible invasion de la part des troupes du bloc soviétique. Le discours tranche avec l'attitude peu engagée et assez tiède des États-Unis au début de la crise berlinoise. ");
+		aide_text.setText(aide);
 		text = new OculText(textoread);
 		TextQuestion.setText(text.getTextCache());
 	}
@@ -240,20 +291,27 @@ public class MediaController implements Initializable {
 					// KeyFrame event handler
 					@Override
 					public void handle(ActionEvent arg0) {
-						timeSeconds--;
+						secTime--;
+						if (secTime < 0) {
+							minTime--;
+							secTime=59;
+						}
 						// update timerLabel
-						timer.setText(
-								"Temps restant : " + timeSeconds.toString()+"s");
-						if (timeSeconds <= 0) {
+						System.out.println("Temps restant : " + minTime.toString()+":"+secTime.toString()+"s");
+						timer.setText("Temps restant : " + minTime.toString()+":"+secTime.toString()+"s");
+						if (secTime <= 0 && minTime <=0) {
 							timeline.stop();
+							return;
 							//TODO fermer les moyens d'écrire à la fin du timer
 						}
+						
 					}
 				}));
 		timeline.playFromStart();
 	}
 	public void stopWatchCreation() {
-		timeSeconds=0;
+		minTime=0;
+		secTime=0;
 		timeline = new Timeline();
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.getKeyFrames().add(
@@ -262,12 +320,15 @@ public class MediaController implements Initializable {
 					// KeyFrame event handler
 					@Override
 					public void handle(ActionEvent arg0) {
-						timeSeconds++;
+						secTime++;
 						// update timerLabel
-						timer.setText(
-								"Temps restant : " + timeSeconds.toString()+"s");
+						timer.setText("Temps restant : " + minTime.toString()+":"+secTime.toString()+"s");
 						if (helpopened) {
 							timeline.stop();
+						}
+						if(secTime>=59) {
+							minTime++;
+							secTime=0;
 						}
 					}
 				}));
@@ -291,8 +352,8 @@ public class MediaController implements Initializable {
 	@FXML private void showSolution() {
 		response.setDisable(true);
 		TextQuestion.setText(text.getText());
-		
-		
+
+
 	}
 	//TODO Dark mode
 	//TODO Interface plus propre

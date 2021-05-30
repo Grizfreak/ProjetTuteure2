@@ -16,6 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MediaController">
    <top>
@@ -59,7 +60,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Label fx:id="timer" prefHeight="43.0" prefWidth="171.0" text="Temps restant : xxs">
+            <Label fx:id="timer" prefHeight="34.0" prefWidth="214.0" text="Temps restant : xxs">
                <VBox.margin>
                   <Insets left="240.0" />
                </VBox.margin>
@@ -67,6 +68,12 @@
                   <Font size="18.0" />
                </font>
             </Label>
+            <Pane prefHeight="102.0" prefWidth="720.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Le but de l'exercice est d'écouter la vidéo et de retrouver les mots et de les écrire à droite">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
             <Slider fx:id="volumeSlider" disable="true" orientation="VERTICAL" visible="false" />
          </children>
          <padding>
@@ -93,7 +100,7 @@
             </Button>
             <Pane fx:id="help" disable="true" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
-                  <TextArea editable="false" prefHeight="200.0" prefWidth="401.0" text="Aide du professeur" />
+                  <TextArea fx:id="aide_text" editable="false" prefHeight="200.0" prefWidth="401.0" style="-fx-wrap-text: true;" text="Aide du professeur" />
                </children>
                <VBox.margin>
                   <Insets top="40.0" />
