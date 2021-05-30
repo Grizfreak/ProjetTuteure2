@@ -22,6 +22,7 @@ public class OculText {
 		wordMap= new HashMap<String, Integer>();
 		createOccultedText();
 	}
+
 	public OculText(String text,String aide,char ocult,boolean casse,boolean partiel,boolean sol,boolean stat) {
 		this.text=text;
 		this.aide=aide;
@@ -120,7 +121,7 @@ public class OculText {
 						if(key.equals(response+i)) replace(key,response);
 					}
 				}
-				
+
 				nb=0;
 			}
 		}
@@ -151,14 +152,14 @@ public class OculText {
 				else if (key.matches(".*[0-9]")) {
 					keyz = key.substring(0,key.length()-1);
 				}
-				
+
 				else {
 					keyz=key;
 				}
 				if(z==keyz.length()) break;
 				chars[i]=keyz.charAt(z);
 				z++;
-				
+
 			}
 		}
 		for(int j=0;j<text.length();j++) {
