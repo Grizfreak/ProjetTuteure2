@@ -293,7 +293,7 @@ public class MediaController implements Initializable {
 				new KeyFrame(Duration.seconds(1),
 						new EventHandler<ActionEvent>() {
 					// KeyFrame event handler
-					@Override
+					@Override	
 					public void handle(ActionEvent arg0) {
 						secTime--;
 						if (secTime < 0) {
@@ -305,8 +305,12 @@ public class MediaController implements Initializable {
 						timer.setText("Temps restant : " + minTime.toString()+":"+secTime.toString()+"s");
 						if (secTime <= 0 && minTime <=0) {
 							timeline.stop();
+							try {
+								openStats();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 							return;
-							//TODO fermer les moyens d'écrire à la fin du timer
 						}
 
 					}
