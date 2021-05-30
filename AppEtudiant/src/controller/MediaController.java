@@ -120,6 +120,9 @@ public class MediaController implements Initializable {
 			if(bfLine.contains("Caractere:")) {
 				if(!bfLine.contains("null"))
 					mechar=bfLine.charAt(12);
+				else {
+					mechar='#';
+				}
 			}
 			if(bfLine.contains("Eval:")) {
 				if(bfLine.contains("1"))
@@ -192,6 +195,11 @@ public class MediaController implements Initializable {
 			System.out.println(keyEvent);
 			if(keyEvent.getCode() == KeyCode.ENTER)validateInput();
 		});
+		text = new OculText(textoread,aide,mechar,casse,partiel,allowSol,allowStat);
+		System.out.println(text.getText());
+		System.out.println(text.getTextCache());
+		TextQuestion.setText(text.getTextCache());
+		aide_text.setText(aide);
 		//*******************************************************ICI SE TROUVENT LES FONCTIONS CHRONO et TIMER************************************//
 		if(mode_eval) {
 			timerCreation();	
@@ -207,9 +215,6 @@ public class MediaController implements Initializable {
 				mp.setVolume(volumeSlider.getValue()/100);
 			}
 		});
-		text = new OculText(textoread,aide,mechar,casse,partiel,allowSol,allowStat);
-		TextQuestion.setText(text.getTextCache());
-		aide_text.setText(aide);
 	}
 
 	@FXML public void gotoHelp() throws IOException {

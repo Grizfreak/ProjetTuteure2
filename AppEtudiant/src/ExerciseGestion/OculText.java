@@ -29,12 +29,12 @@ public class OculText {
 		this.text=text;
 		this.aide=aide;
 		occultation=ocult;
-		wordMap= new HashMap<String, Integer>();
-		createOccultedText();
 		this.casse=casse;
 		this.partiel=partiel;
 		allowSol=sol;
 		allowStat=stat;
+		wordMap= new HashMap<String, Integer>();
+		createOccultedText();
 	}
 
 	public void createOccultedText() {
