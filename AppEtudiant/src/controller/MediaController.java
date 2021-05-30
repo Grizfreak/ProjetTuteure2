@@ -304,7 +304,7 @@ public class MediaController implements Initializable {
 							return;
 							//TODO fermer les moyens d'écrire à la fin du timer
 						}
-						
+
 					}
 				}));
 		timeline.playFromStart();
@@ -341,14 +341,16 @@ public class MediaController implements Initializable {
 		text.searchAndReplace(moche);
 		TextQuestion.setText(text.getTextCache());
 		response.setText("");
-
 	}
+	
 	@FXML private void return10sec() {
 		mp.seek(mp.getCurrentTime().subtract(Duration.seconds(10)));
 	}
+	
 	@FXML private void skip10sec() {
 		mp.seek(mp.getCurrentTime().add(Duration.seconds(10)));
 	}
+	
 	@FXML private void showSolution() {
 		response.setDisable(true);
 		TextQuestion.setText(text.getText());
