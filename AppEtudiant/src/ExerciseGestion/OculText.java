@@ -7,6 +7,8 @@ public class OculText {
 	private String textCache="";
 	private String aide;
 	private char occultation='#';
+	private int nbmots=0;
+	private int nbmotstrouves=0;
 	private HashMap<String, Integer> wordMap;
 	private static int endouble=0;
 	private boolean casse=true;
@@ -51,8 +53,10 @@ public class OculText {
 							}
 					}*/
 				String modifiedWord = newWord.replaceAll("[^a-zA-Z0-9\'È…-]", "");
-				if(!wordMap.containsKey(modifiedWord.trim()))
+				if(!wordMap.containsKey(modifiedWord.trim())) {
 					wordMap.put(modifiedWord.trim(),i-newWord.trim().length());
+					nbmots++;
+				}	
 				else {
 					wordMap.put(modifiedWord.trim().toLowerCase()+endouble, i-newWord.trim().length());
 					endouble++;
@@ -84,9 +88,11 @@ public class OculText {
 	public String getTextCache() {
 		return textCache;
 	}
+
 	public void searchAndReplace(String response) {
 		String keym="";
 		for(String key : wordMap.keySet()) {
+			nbmotstrouves++;
 			if(!partiel) {
 				if(!casse) {
 					keym=response.toLowerCase();
@@ -174,5 +180,13 @@ public class OculText {
 
 	public boolean isAllowStat() {
 		return allowStat;
+	}
+
+	public int getNbmots() {
+		return nbmots;
+	}
+
+	public int getMotTrouves() {
+		return nbmotstrouves;
 	}
 }

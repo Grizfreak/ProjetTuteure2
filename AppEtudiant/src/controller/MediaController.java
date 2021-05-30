@@ -64,7 +64,7 @@ public class MediaController implements Initializable {
 	private boolean volumeopened=false;
 	private String textoread;
 	private String aide;
-	private OculText text;
+	private static OculText text;
 	private File f;
 	private File tmpFile;
 	private int mediaLength;
@@ -92,6 +92,10 @@ public class MediaController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static OculText getText() {
+		return text;
 	}
 
 	public void launchexo() throws IOException {
@@ -203,9 +207,9 @@ public class MediaController implements Initializable {
 				mp.setVolume(volumeSlider.getValue()/100);
 			}
 		});
-		aide_text.setText(aide);
-		text = new OculText(textoread);
+		text = new OculText(textoread,aide,mechar,casse,partiel,allowSol,allowStat);
 		TextQuestion.setText(text.getTextCache());
+		aide_text.setText(aide);
 	}
 
 	@FXML public void gotoHelp() throws IOException {
@@ -354,8 +358,15 @@ public class MediaController implements Initializable {
 	@FXML private void showSolution() {
 		response.setDisable(true);
 		TextQuestion.setText(text.getText());
-
-
+	}
+	
+	public void openStats() throws IOException {
+		Parent saved = FXMLLoader.load(getClass().getResource("/view/Stats.fxml"));
+		Scene save = new Scene(saved);
+		Stage saving = new Stage();
+		saving.initModality(Modality.APPLICATION_MODAL);
+		saving.setScene(save);
+		saving.show();
 	}
 	//TODO Dark mode
 	//TODO Interface plus propre
