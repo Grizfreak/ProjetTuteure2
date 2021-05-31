@@ -92,7 +92,6 @@ public class OculText {
 
 	public void searchAndReplace(String response) {
 		String keym="";
-		nbmotstrouves++;
 		for(String key : wordMap.keySet()) {
 			if(!partiel) {
 				if(!casse) {
@@ -100,6 +99,7 @@ public class OculText {
 				}
 				if(key.equals(response)||key.toLowerCase().equals(keym)) {
 					replace(key,response);
+					nbmotstrouves++;
 				}
 
 				for(int i=0;i<endouble;i++) {
@@ -118,6 +118,7 @@ public class OculText {
 				}
 				if(key.equals(response)) {
 					replace(key,response);
+					nbmotstrouves++;
 				}
 				for(int i=0;i<endouble;i++) {
 					if(key.equals(response+i)) replace(key,response);
