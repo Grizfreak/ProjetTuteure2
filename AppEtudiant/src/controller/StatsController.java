@@ -13,9 +13,10 @@ public class StatsController implements Initializable{
 	private OculText text;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub	
+		System.out.println("j'suis con");
 		text=MediaController.getText();
-		score.setText("Score : "+text.getMotTrouves()+" / "+text.getNbmots());
+		score.setText("Score : "+text.getMotTrouves()+"/"+text.getNbmots());
 	}
 
 }

@@ -9,6 +9,7 @@ public class OculText {
 	private char occultation='#';
 	private int nbmots=0;
 	private int nbmotstrouves=0;
+	private boolean isFinished=false;
 	private HashMap<String, Integer> wordMap;
 	private static int endouble=0;
 	private boolean casse=true;
@@ -91,8 +92,8 @@ public class OculText {
 
 	public void searchAndReplace(String response) {
 		String keym="";
+		nbmotstrouves++;
 		for(String key : wordMap.keySet()) {
-			nbmotstrouves++;
 			if(!partiel) {
 				if(!casse) {
 					keym=response.toLowerCase();
@@ -131,7 +132,14 @@ public class OculText {
 				nb=0;
 			}
 		}
+		if(textCache.equals(text)) {
+			setFinished(true);
+		}
 
+	}
+
+	public boolean isFinished() {
+		return isFinished;
 	}
 
 	private void replace(String key,String response) {
@@ -189,4 +197,10 @@ public class OculText {
 	public int getMotTrouves() {
 		return nbmotstrouves;
 	}
+
+	public void setFinished(boolean isFinished) {
+		this.isFinished = isFinished;
+	}
+	
+	
 }

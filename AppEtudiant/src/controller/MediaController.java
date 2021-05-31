@@ -193,7 +193,13 @@ public class MediaController implements Initializable {
 		handleTime();
 		response.addEventFilter(KeyEvent.ANY, keyEvent -> {
 			System.out.println(keyEvent);
-			if(keyEvent.getCode() == KeyCode.ENTER)validateInput();
+			if(keyEvent.getCode() == KeyCode.ENTER)
+				try {
+					validateInput();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		});
 		text = new OculText(textoread,aide,mechar,casse,partiel,allowSol,allowStat);
 		System.out.println(text.getText());
@@ -306,7 +312,6 @@ public class MediaController implements Initializable {
 							secTime=59;
 						}
 						// update timerLabel
-						System.out.println("Temps restant : " + minTime.toString()+":"+secTime.toString()+"s");
 						timer.setText("Temps restant : " + minTime.toString()+":"+secTime.toString()+"s");
 						if (secTime <= 0 && minTime <=0) {
 							timeline.stop();
@@ -348,12 +353,16 @@ public class MediaController implements Initializable {
 		timeline.playFromStart();
 	}
 
-	@FXML public void validateInput() {
+	@FXML public void validateInput() throws IOException {
 		String moche = response.getText();
 		moche.trim();
 		text.searchAndReplace(moche);
 		TextQuestion.setText(text.getTextCache());
 		response.setText("");
+		if(text.isFinished()) {
+			timeline.stop();
+			openStats();
+		}
 	}
 	
 	@FXML private void return10sec() {
