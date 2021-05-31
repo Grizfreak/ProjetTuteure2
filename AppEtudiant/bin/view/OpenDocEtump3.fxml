@@ -45,20 +45,20 @@
       <VBox prefHeight="566.0" prefWidth="574.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="mp3Player" fitHeight="480.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true" />
-            <Slider fx:id="timeSlider" disable="true" majorTickUnit="5.0" minorTickCount="1" />
+            <Slider fx:id="timeSlider" disable="true" majorTickUnit="5.0" minorTickCount="1" prefHeight="14.0" prefWidth="661.0" />
             <MediaView fx:id="mvPlayer" />
             <Pane>
                <children>
                   <Button fx:id="playPause" layoutX="241.0" layoutY="3.0" mnemonicParsing="false" onAction="#playOrPause" text="Pause" />
-                  <Button layoutX="107.0" layoutY="4.0" mnemonicParsing="false" onAction="#gotoHelp" text="Aide" />
                   <Button layoutX="504.0" layoutY="2.0" mnemonicParsing="false" onAction="#skip10sec" text="Button" />
-                  <Button layoutX="383.0" layoutY="2.0" mnemonicParsing="false" onAction="#return10sec" text="Button" />
+                  <Button layoutX="370.0" layoutY="2.0" mnemonicParsing="false" onAction="#return10sec" text="Button" />
                   <Button fx:id="launch" layoutX="654.0" layoutY="3.0" mnemonicParsing="false" onAction="#launchexo" style="-fx-background-color: red;" text="Démarrer" />
                   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="-6.0" onMouseClicked="#showVolume" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../png-clipart-computer-icons-sound-sound-logo-monochrome.png" />
                      </image>
                   </ImageView>
+                  <Label fx:id="videoTime" layoutX="68.0" layoutY="7.0" prefHeight="17.0" prefWidth="141.0" text="Video : 0.00/5.255" visible="false" />
                </children>
             </Pane>
             <Label fx:id="timer" prefHeight="42.0" prefWidth="208.0" text="Temps restant : xxs">
@@ -69,13 +69,13 @@
                   <Insets left="240.0" />
                </VBox.margin>
             </Label>
-            <Pane prefHeight="63.0" prefWidth="720.0" />
+            <Slider fx:id="volumeSlider" disable="true" orientation="VERTICAL" visible="false" />
+            <Pane prefHeight="36.0" prefWidth="720.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Le but de l'exercice est d'écouter la vidéo et de retrouver les mots et de les écrire à droite">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
-            <Slider fx:id="volumeSlider" disable="true" orientation="VERTICAL" visible="false" />
          </children>
          <padding>
             <Insets left="30.0" right="30.0" top="50.0" />
@@ -86,7 +86,7 @@
       <VBox BorderPane.alignment="CENTER" />
    </center>
    <right>
-      <VBox fx:id="responsebox" BorderPane.alignment="CENTER">
+      <VBox BorderPane.alignment="CENTER">
          <children>
             <TextArea fx:id="TextQuestion" disable="true" prefHeight="230.0" prefWidth="593.0" style="-fx-wrap-text: true;" />
             <TextField fx:id="response" style="-fx-background-color: E2E2E2;">
@@ -94,14 +94,16 @@
                   <Insets top="200.0" />
                </VBox.margin>
             </TextField>
-            <Button mnemonicParsing="false" onAction="#validateInput" text="Valider">
+            <Button fx:id="responsebox" mnemonicParsing="false" onAction="#validateInput" text="Valider">
                <VBox.margin>
                   <Insets top="12.0" />
                </VBox.margin>
             </Button>
-            <Pane fx:id="help" disable="true" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <Pane prefHeight="41.0" prefWidth="593.0" />
+            <Pane fx:id="help" prefHeight="239.0" prefWidth="593.0">
                <children>
-                  <TextArea fx:id="aide_text" editable="false" prefHeight="200.0" prefWidth="401.0" style="-fx-wrap-text: true;" text="Aide du professeur" />
+                  <Button mnemonicParsing="false" onAction="#gotoHelp" text="Aide" />
+                  <TextArea fx:id="aide_text" disable="true" editable="false" layoutY="39.0" prefHeight="200.0" prefWidth="401.0" style="-fx-wrap-text: true;" text="Aide du professeur" visible="false" />
                </children>
                <VBox.margin>
                   <Insets top="40.0" />

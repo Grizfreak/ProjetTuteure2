@@ -46,15 +46,16 @@ public class MediaController implements Initializable {
 	@FXML private MediaView mvPlayer;
 	@FXML private ImageView mp3Player;
 	@FXML private Button playPause;
-	@FXML private VBox responsebox;
+	@FXML private Button responsebox;
 	@FXML private Button launch;
-	@FXML private Pane help;
 	@FXML private Label timer;
 	@FXML private Slider timeSlider;
 	@FXML private Slider volumeSlider;
 	@FXML private TextArea TextQuestion;
 	@FXML private TextField response;
 	@FXML private TextArea aide_text;
+	@FXML private Label videoTime;
+	@FXML private Button helpButton;
 	private MediaPlayer mp;
 	private Media me; 
 	private Integer minTime;
@@ -189,8 +190,12 @@ public class MediaController implements Initializable {
 		launch.setVisible(false);
 		timeSlider.setDisable(false);
 		volumeSlider.setDisable(false);
+		videoTime.setVisible(true);
+		helpButton.setVisible(true);;
 		timer.setText("Temps restant : " + minTime.toString()+":"+secTime.toString()+"s");
 		handleTime();
+		
+		videoTime.setText("Video : "+formatTime(mp.getCurrentTime(), me.getDuration()));
 		response.addEventFilter(KeyEvent.ANY, keyEvent -> {
 			System.out.println(keyEvent);
 			if(keyEvent.getCode() == KeyCode.ENTER)
@@ -224,13 +229,17 @@ public class MediaController implements Initializable {
 
 	@FXML public void gotoHelp() throws IOException {
 		if(helpopened) {
-			help.setVisible(false);
+			TextQuestion.setDisable(false);
+			response.setDisable(false);
 			responsebox.setDisable(false);
+			aide_text.setVisible(false);
 			helpopened=false;
 		}
 		else {
-			help.setVisible(true);
+			TextQuestion.setDisable(true);
+			response.setDisable(true);
 			responsebox.setDisable(true);
+			aide_text.setVisible(true);
 			helpopened=true;
 		}
 	}
@@ -294,6 +303,7 @@ public class MediaController implements Initializable {
 
 			// Re-add the slider listener
 			timeSlider.valueProperty().addListener(sliderChangeListener);
+			videoTime.setText("Video : "+formatTime(mp.getCurrentTime(), me.getDuration()));
 		});
 	}
 	public void timerCreation() {
@@ -389,4 +399,42 @@ public class MediaController implements Initializable {
 	//TODO Interface plus propre
 	//TODO vérif Balsamik
 
+	private static String formatTime(Duration elapsed, Duration duration) {
+		   int intElapsed = (int)Math.floor(elapsed.toSeconds());
+		   int elapsedHours = intElapsed / (60 * 60);
+		   if (elapsedHours > 0) {
+		       intElapsed -= elapsedHours * 60 * 60;
+		   }
+		   int elapsedMinutes = intElapsed / 60;
+		   int elapsedSeconds = intElapsed - elapsedHours * 60 * 60 
+		                           - elapsedMinutes * 60;
+		 
+		   if (duration.greaterThan(Duration.ZERO)) {
+		      int intDuration = (int)Math.floor(duration.toSeconds());
+		      int durationHours = intDuration / (60 * 60);
+		      if (durationHours > 0) {
+		         intDuration -= durationHours * 60 * 60;
+		      }
+		      int durationMinutes = intDuration / 60;
+		      int durationSeconds = intDuration - durationHours * 60 * 60 - 
+		          durationMinutes * 60;
+		      if (durationHours > 0) {
+		         return String.format("%d:%02d:%02d/%d:%02d:%02d", 
+		            elapsedHours, elapsedMinutes, elapsedSeconds,
+		            durationHours, durationMinutes, durationSeconds);
+		      } else {
+		          return String.format("%02d:%02d/%02d:%02d",
+		            elapsedMinutes, elapsedSeconds,durationMinutes, 
+		                durationSeconds);
+		      }
+		      } else {
+		          if (elapsedHours > 0) {
+		             return String.format("%d:%02d:%02d", elapsedHours, 
+		                    elapsedMinutes, elapsedSeconds);
+		            } else {
+		                return String.format("%02d:%02d",elapsedMinutes, 
+		                    elapsedSeconds);
+		            }
+		        }
+		    }
 }
