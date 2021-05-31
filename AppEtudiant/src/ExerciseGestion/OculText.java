@@ -156,7 +156,6 @@ public class OculText {
 				if(z<=response.length() && !response.equals(key))z++;
 			}
 			else {
-				//TODO bonne soirée je pleure :pensive: MODIFIER LES REGEX
 				String keyz="";
 				if(key.matches("\\d+")) {
 					keyz=key;

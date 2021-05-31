@@ -31,7 +31,6 @@ public class TestController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		
 	}
 	@FXML private void openFile() throws IOException {
@@ -45,7 +44,6 @@ public class TestController implements Initializable{
 		System.out.println(tmpFile.getAbsolutePath());
 		
 		
-		//TODO régler fonctionnement arrièreplan CHANGER CETTE MERDE
 		FileInputStream fis = new FileInputStream(f);
 		BufferedReader bf = new BufferedReader(new FileReader(f));
 		while(bf.ready()) {
@@ -82,57 +80,5 @@ public class TestController implements Initializable{
 		mvPlayer.setMediaPlayer(mp);
 		tmpFile.deleteOnExit();
 	}
-	
-
-	 /*private void loadAppConfigurationFile () {
-	        Task<Void> task = new Task<Void>() {
-	            @Override
-	            public Void call() throws InterruptedException {
-	                int max = 1000000;
-	               
-	                for (int i = 1; i <= max; i = i + 10) {
-	                    if (isCancelled()) {
-	                        break;
-	                    }
-	                    updateProgress(i, max);
-	                    try {
-	            			//TODO réfléchir à cette immondice
-	            			FileInputStream fis = new FileInputStream(f);
-	            			BufferedReader bf = new BufferedReader(new FileReader(f));
-	            			while(bf.ready()) {
-	            				String bfLine=bf.readLine();
-	            				if(bfLine.contains("nb :")){
-	            					String numberOnly= bfLine.replaceAll("[^0-9]", "");
-	            					System.out.println(numberOnly);
-	            					video_length=Integer.parseInt(numberOnly);
-	            				}
-	            			}
-	            			fis.close();
-	            			FileInputStream fas = new FileInputStream(f);
-	            			FileOutputStream fos = new FileOutputStream(tmpFile);
-	            			int octet = fas.read();
-	            			while (nb <= video_length) {
-	            					fos.write(octet);
-	            					/*if(octet == 58) {
-	            						System.out.println(nb+" / "+f.length());
-		            					System.out.println(octet);
-	            					}
-	            					System.out.println(nb);
-	            					octet=fas.read();
-	            					nb++;
-	            					
-	            			}
-	            			System.out.println("file used");
-	            			fos.close();
-	            			fas.close();
-	            		} catch (IOException e) {
-	            			e.printStackTrace();
-	            		}
-	                }
-	                return null;
-	            }
-	        };
-	        new Thread(task).start();
-	    }*/
 
 }

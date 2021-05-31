@@ -77,7 +77,6 @@ public class MediaController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1){
 		f=MenuController.f;
-		//TODO GENERATE TEXT AVEC UNE FONCTION EMBARQUEE
 		try {
 			if(MenuController.ismp3) {
 				tmpFile = File.createTempFile("media", ".mp3");
@@ -113,7 +112,8 @@ public class MediaController implements Initializable {
 				bfLine=bf.readLine();
 				while(!bfLine.contains("Caractere:")) {
 					System.out.println(textoread);
-					textoread+=" "+bfLine;
+					//if(bfLine.matches("^[A-Z]*"))textoread+=" \n"+bfLine;
+					/*else*/ textoread+=" "+bfLine; //TODO faire des sauts de ligne
 					bfLine=bf.readLine();
 				}
 			}
@@ -197,7 +197,6 @@ public class MediaController implements Initializable {
 				try {
 					validateInput();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		});

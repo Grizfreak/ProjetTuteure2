@@ -26,7 +26,6 @@ public class MenuController implements Initializable {
 	public static boolean ismp3=false;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 
 	}
 	@FXML

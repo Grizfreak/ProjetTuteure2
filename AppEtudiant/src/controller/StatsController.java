@@ -12,8 +12,7 @@ public class StatsController implements Initializable{
 	@FXML private Label score;
 	private OculText text;
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub	
+	public void initialize(URL arg0, ResourceBundle arg1) {	
 		System.out.println("j'suis con");
 		text=MediaController.getText();
 		score.setText("Score : "+text.getMotTrouves()+"/"+text.getNbmots());
