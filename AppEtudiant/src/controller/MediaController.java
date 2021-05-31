@@ -113,9 +113,11 @@ public class MediaController implements Initializable {
 				bfLine=bf.readLine();
 				while(!bfLine.contains("Caractere:")) {
 					System.out.println(textoread);
-					//if(bfLine.matches("^[A-Z]*"))textoread+=" \n"+bfLine;
-					/*else*/ textoread+=" "+bfLine; //TODO faire des sauts de ligne
+					/*if(bfLine.contains("@"))textoread+=" "+System.getProperty("line.separator")+" "+bfLine;
+					textoread+=" "+bfLine; //TODO faire des sauts de ligne*/
+					textoread+=bfLine;
 					bfLine=bf.readLine();
+					System.out.println(textoread);
 				}
 			}
 			if(bfLine.contains("Caractere:")) {
@@ -161,6 +163,7 @@ public class MediaController implements Initializable {
 				}
 			}
 		}
+		bf.close();
 		fis.close();
 		FileInputStream fas = new FileInputStream(f);
 		FileOutputStream fos = new FileOutputStream(tmpFile);

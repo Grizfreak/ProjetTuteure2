@@ -27,6 +27,7 @@ public class OculText {
 	}
 
 	public OculText(String text,String aide,char ocult,boolean casse,boolean partiel,boolean sol,boolean stat) {
+		text=text.replaceAll("@", System.getProperty("line.separator"));
 		this.text=text;
 		this.aide=aide;
 		occultation=ocult;
