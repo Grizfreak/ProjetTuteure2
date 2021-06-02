@@ -98,7 +98,11 @@
                   <Insets top="12.0" />
                </VBox.margin>
             </Button>
-            <Pane prefHeight="34.0" prefWidth="593.0" />
+            <Pane prefHeight="34.0" prefWidth="593.0">
+               <children>
+                  <ImageView fx:id="responseDisplay" fitHeight="36.0" fitWidth="36.0" layoutX="63.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+                  <Label fx:id="responseTextDisplay" layoutX="107.0" layoutY="9.0" text="Le mot à été validé" visible="false" />
+               </children></Pane>
             <Pane prefHeight="236.0" prefWidth="593.0">
                <children>
                   <Button fx:id="helpButton" mnemonicParsing="false" onAction="#gotoHelp" text="Aide" />

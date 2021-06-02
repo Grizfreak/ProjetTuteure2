@@ -56,6 +56,8 @@ public class MediaController implements Initializable {
 	@FXML private TextArea aide_text;
 	@FXML private Label videoTime;
 	@FXML private Button helpButton;
+	@FXML private Label responseTextDisplay;
+	@FXML private ImageView responseDisplay;
 	private MediaPlayer mp;
 	private Media me; 
 	private Integer minTime;
@@ -65,16 +67,16 @@ public class MediaController implements Initializable {
 	private boolean volumeopened=false;
 	private String textoread;
 	private String aide;
-	private static OculText text;
+	public static OculText text;
 	private File f;
 	private File tmpFile;
 	private int mediaLength;
 	private char mechar;
-	private boolean casse=false;
-	private boolean partiel =false;
-	private boolean allowSol =false;
-	private boolean allowStat =false;
-	private boolean mode_eval=false;
+	public static boolean casse=false;
+	public static boolean partiel =false;
+	public static boolean allowSol =false;
+	public static boolean allowStat =false;
+	public static boolean mode_eval=false;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1){
 		f=MenuController.f;
@@ -113,8 +115,6 @@ public class MediaController implements Initializable {
 				bfLine=bf.readLine();
 				while(!bfLine.contains("Caractere:")) {
 					System.out.println(textoread);
-					/*if(bfLine.contains("@"))textoread+=" "+System.getProperty("line.separator")+" "+bfLine;
-					textoread+=" "+bfLine; //TODO faire des sauts de ligne*/
 					textoread+=bfLine;
 					bfLine=bf.readLine();
 					System.out.println(textoread);
@@ -199,8 +199,7 @@ public class MediaController implements Initializable {
 		handleTime();
 		
 		videoTime.setText("Video : "+formatTime(mp.getCurrentTime(), me.getDuration()));
-		response.addEventFilter(KeyEvent.ANY, keyEvent -> {
-			System.out.println(keyEvent);
+		response.addEventFilter(KeyEvent.KEY_RELEASED, keyEvent -> {
 			if(keyEvent.getCode() == KeyCode.ENTER)
 				try {
 					validateInput();
@@ -368,7 +367,20 @@ public class MediaController implements Initializable {
 	@FXML public void validateInput() throws IOException {
 		String moche = response.getText();
 		moche.trim();
+		String previous = text.getTextCache();
 		text.searchAndReplace(moche);
+		responseDisplay.setVisible(true);
+		responseTextDisplay.setVisible(true);
+		if(previous.equals(text.getTextCache())) {
+			System.out.println("fonction entrée -----------------------------------------------------");
+			responseDisplay.setImage(new Image(getClass().getResource("/images/red_cross.png").toString()));
+			responseTextDisplay.setText("Mince ! Le mot n'existe pas");
+		}
+		else {
+			responseTextDisplay.setVisible(true);
+			responseDisplay.setImage(new Image(getClass().getResource("/images/green_check.png").toString()));
+			responseTextDisplay.setText("Bravo ! le mot est validé");
+		}
 		TextQuestion.setText(text.getTextCache());
 		response.setText("");
 		if(text.isFinished()) {

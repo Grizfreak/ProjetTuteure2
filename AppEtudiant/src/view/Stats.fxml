@@ -34,7 +34,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Button layoutX="149.0" layoutY="553.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="138.0" text="Sauvegarder" />
+      <Button fx:id="save" layoutX="149.0" layoutY="553.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="138.0" text="Sauvegarder" />
       <Label fx:id="score" layoutX="139.0" layoutY="116.0" prefHeight="53.0" prefWidth="158.0" text="Score : 78/80">
          <font>
             <Font size="24.0" />
