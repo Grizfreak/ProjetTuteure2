@@ -13,13 +13,12 @@ public class test {
 				+ "The last and final moment is yours @ "
 				+ "That agony is your triumph ");
 		System.out.println(bit.getText());
-		System.out.println(bit.getTextCache());
 		while(!bit.getText().equals(bit.getTextCache())) {
 			System.out.print( "Entre ton mot\n" );
 			while(!in.hasNextLine()) {
 				in.next();
 			}
-			response = in.nextLine();
+			response = in.nextLine().trim();
 			bit.searchAndReplace(response);
 			System.out.println(bit.getTextCache());
 		}
