@@ -13,7 +13,7 @@ public class test {
 				+ "The last and final moment is yours @ "
 				+ "That agony is your triumph ");
 		System.out.println(bit.getText());
-		while(!bit.getText().equals(bit.getTextCache())) {
+		while(!bit.isFinished()) {
 			System.out.print( "Entre ton mot\n" );
 			while(!in.hasNextLine()) {
 				in.next();
@@ -23,6 +23,7 @@ public class test {
 			System.out.println(bit.getTextCache());
 		}
 		in.close();
+		System.out.println(bit.getMotTrouves()+" / "+bit.getNbmots());
 		System.out.println("Bravo tu as terminé");
 	}
 

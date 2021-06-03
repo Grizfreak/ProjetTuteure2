@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -55,7 +56,7 @@ public class SaveController implements Initializable {
 		if(fileName.getText().trim()=="")done.setDisable(true);
 	}
 	
-	@FXML private void save() {
+	@FXML private void save() throws IOException{
 		
 	}
 
