@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SaveController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SaveController">
    <children>
       <TextField fx:id="name" layoutX="106.0" layoutY="55.0" onKeyTyped="#changeFileName" style="-fx-background-color: EDECEC;" />
       <Text layoutX="60.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" />
@@ -26,6 +26,6 @@
       <TextField fx:id="fileName" disable="true" layoutX="114.0" layoutY="228.0" prefHeight="26.0" prefWidth="412.0" style="-fx-background-color: EDECEC;" />
       <TextField fx:id="path" disable="true" layoutX="117.0" layoutY="316.0" prefHeight="26.0" prefWidth="331.0" style="-fx-background-color: EDECEC;" />
       <Button layoutX="448.0" layoutY="313.0" mnemonicParsing="false" onAction="#choosePath" prefHeight="32.0" prefWidth="81.0" text="Parcourir..." />
-      <Button fx:id="done" disable="true" layoutX="537.0" layoutY="313.0" mnemonicParsing="false" text="Valider" />
+      <Button fx:id="done" disable="true" layoutX="537.0" layoutY="313.0" mnemonicParsing="false" onAction="#save" text="Valider" />
    </children>
 </Pane>

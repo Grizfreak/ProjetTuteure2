@@ -207,7 +207,7 @@ public class MediaController implements Initializable {
 					e.printStackTrace();
 				}
 		});
-		text = new OculText(textoread,aide,mechar,casse,partiel,allowSol,allowStat);
+		text = new OculText(textoread+' ',aide,mechar,casse,partiel,allowSol,allowStat);
 		System.out.println(text.getText());
 		System.out.println(text.getTextCache());
 		TextQuestion.setText(text.getTextCache());

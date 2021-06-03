@@ -87,18 +87,24 @@
    <right>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="TextQuestion" disable="true" prefHeight="230.0" prefWidth="593.0" style="-fx-wrap-text: true;" />
+            <TextArea fx:id="TextQuestion" disable="true" prefHeight="330.0" prefWidth="593.0" style="-fx-wrap-text: true;">
+               <font>
+                  <Font size="25.0" />
+               </font></TextArea>
             <TextField fx:id="response" style="-fx-background-color: E2E2E2;">
                <VBox.margin>
                   <Insets top="200.0" />
                </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
             </TextField>
             <Button fx:id="responsebox" mnemonicParsing="false" onAction="#validateInput" text="Valider">
                <VBox.margin>
                   <Insets top="12.0" />
                </VBox.margin>
             </Button>
-            <Pane prefHeight="34.0" prefWidth="593.0">
+            <Pane prefHeight="37.0" prefWidth="593.0">
                <children>
                   <ImageView fx:id="responseDisplay" fitHeight="36.0" fitWidth="36.0" layoutX="63.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" visible="false" />
                   <Label fx:id="responseTextDisplay" layoutX="107.0" layoutY="9.0" text="Le mot à été validé" visible="false" />

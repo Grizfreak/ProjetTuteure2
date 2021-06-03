@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,6 +28,7 @@ public class SaveController implements Initializable {
 	private boolean allowSol =false;
 	private boolean allowStat =false;
 	private boolean mode_eval=false;
+	private String filepath;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.casse=MediaController.casse;
@@ -52,12 +54,18 @@ public class SaveController implements Initializable {
 	}
 
 	private void setDoneActive() {
-		if (!path.getText().trim().isEmpty() && !fileName.getText().trim().isEmpty())done.setDisable(false); 
+		if (!path.getText().trim().isEmpty() && !fileName.getText().trim().isEmpty()) {
+			done.setDisable(false); 
+			filepath=path.getText()+fileName.getText();
+		}
 		if(fileName.getText().trim()=="")done.setDisable(true);
 	}
 	
 	@FXML private void save() throws IOException{
-		
+		if(filepath !=null) {
+			System.out.println(filepath);
+			FileOutputStream fos = new FileOutputStream("C:\\Users\\anton\\DownloadsA_A.exo");
+		}
 	}
 
 }
