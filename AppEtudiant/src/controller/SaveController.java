@@ -91,16 +91,16 @@ public class SaveController implements Initializable {
 			pt.print("Mode évaluation : "+(mode_eval ? 1 : 0));
 			pt.close();
 		}
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Confirmation");
-		alert.setHeaderText("Votre fichier a bien été enregistré");
-		alert.setContentText("Votre fichier a été enregistré à l'emplacement suivant : "+filepath);
 		Parent root = FXMLLoader.load(getClass().getResource("/view/AppEtu.fxml"));
 		Stage thisStage = (Stage) Main.actualRoot.getScene().getWindow();
 		Main.actualRoot=root;
 		Scene next = new Scene(root,Main.width,Main.height);
 		thisStage.setScene(next);
 		stage.close();
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Confirmation");
+		alert.setHeaderText("Votre fichier a bien été enregistré");
+		alert.setContentText("Votre fichier a été enregistré à l'emplacement suivant : "+filepath);
 	}
 
 }
