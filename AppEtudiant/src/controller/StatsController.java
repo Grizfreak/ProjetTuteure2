@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class StatsController implements Initializable{
 	@FXML private Label score;
@@ -21,7 +22,6 @@ public class StatsController implements Initializable{
 	private OculText text;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {	
-		System.out.println("j'suis con");
 		text=MediaController.getText();
 		score.setText("Score : "+text.getMotTrouves()+"/"+text.getNbmots());
 	}
@@ -29,6 +29,7 @@ public class StatsController implements Initializable{
 		Parent saved = FXMLLoader.load(getClass().getResource("/view/PopupSave.fxml"));
 		Scene save = new Scene(saved);
 		Stage saving = new Stage();
+		saving.initStyle(StageStyle.UNDECORATED);
 		saving.initModality(Modality.APPLICATION_MODAL);
 		saving.setScene(save);
 		saving.show();

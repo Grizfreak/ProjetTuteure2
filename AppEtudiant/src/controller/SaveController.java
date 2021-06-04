@@ -37,6 +37,8 @@ public class SaveController implements Initializable {
 	private boolean allowSol =false;
 	private boolean allowStat =false;
 	private boolean mode_eval=false;
+	private Integer minTime;
+	private Integer secTime;
 	private String filepath;
 	public static Stage stage;
 	@Override
@@ -89,6 +91,14 @@ public class SaveController implements Initializable {
 			pt.print("Autorisation de l'affichage des statistiques : "+(allowStat ? 1 : 0));
 			pt.print(System.lineSeparator());
 			pt.print("Mode évaluation : "+(mode_eval ? 1 : 0));
+			if(mode_eval) {
+				pt.print(System.lineSeparator());
+				pt.print("Temps restant : "+minTime+":"+secTime);
+			}
+			else{
+				pt.print(System.lineSeparator());
+				pt.print("Temps écoulé : "+minTime+":"+secTime);
+			}
 			pt.close();
 		}
 		Parent root = FXMLLoader.load(getClass().getResource("/view/AppEtu.fxml"));
@@ -101,6 +111,7 @@ public class SaveController implements Initializable {
 		alert.setTitle("Confirmation");
 		alert.setHeaderText("Votre fichier a bien été enregistré");
 		alert.setContentText("Votre fichier a été enregistré à l'emplacement suivant : "+filepath);
+		alert.show();
 	}
 
 }

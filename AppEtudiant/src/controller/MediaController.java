@@ -40,6 +40,7 @@ import javafx.scene.media.MediaView;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class MediaController implements Initializable {
@@ -75,6 +76,8 @@ public class MediaController implements Initializable {
 	public static boolean casse=false;
 	public static boolean partiel =false;
 	public static boolean allowSol =false;
+	public static Integer minFinalTime;
+	public static Integer secFinalTime;
 	public static boolean allowStat =false;
 	public static boolean mode_eval=false;
 	@Override
@@ -263,12 +266,20 @@ public class MediaController implements Initializable {
 		if(key.equals("image"))mp3Player.setImage((Image) valueAdded);
 
 	}
-
+	public void pause() {
+		mp.stop();
+		timeline.stop();
+		minFinalTime=minTime;
+		secFinalTime=secTime;
+		
+	}
 	@FXML public void openSave() throws IOException {
+		pause();
 		Parent saved = FXMLLoader.load(getClass().getResource("/view/PopupSave.fxml"));
 		Scene save = new Scene(saved);
 		Stage saving = new Stage();
 		SaveController.stage=saving;
+		saving.initStyle(StageStyle.UNDECORATED);
 		saving.initModality(Modality.APPLICATION_MODAL);
 		saving.setScene(save);
 		saving.show();
@@ -404,9 +415,11 @@ public class MediaController implements Initializable {
 	}
 	
 	public void openStats() throws IOException {
+		pause();
 		Parent saved = FXMLLoader.load(getClass().getResource("/view/Stats.fxml"));
 		Scene save = new Scene(saved);
 		Stage saving = new Stage();
+		saving.initStyle(StageStyle.UTILITY);
 		saving.initModality(Modality.APPLICATION_MODAL);
 		saving.setScene(save);
 		saving.show();
