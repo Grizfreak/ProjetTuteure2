@@ -3,15 +3,24 @@ package controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import ExerciseGestion.OculText;
+import application.Main;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 
 public class SaveController implements Initializable {
 	@FXML private TextField name;
@@ -29,8 +38,10 @@ public class SaveController implements Initializable {
 	private boolean allowStat =false;
 	private boolean mode_eval=false;
 	private String filepath;
+	public static Stage stage;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
 		this.casse=MediaController.casse;
 		this.partiel=MediaController.partiel;
 		this.allowSol=MediaController.allowSol;
@@ -56,7 +67,7 @@ public class SaveController implements Initializable {
 	private void setDoneActive() {
 		if (!path.getText().trim().isEmpty() && !fileName.getText().trim().isEmpty()) {
 			done.setDisable(false); 
-			filepath=path.getText()+fileName.getText();
+			filepath=path.getText()+"/"+fileName.getText();
 		}
 		if(fileName.getText().trim()=="")done.setDisable(true);
 	}
@@ -64,8 +75,32 @@ public class SaveController implements Initializable {
 	@FXML private void save() throws IOException{
 		if(filepath !=null) {
 			System.out.println(filepath);
-			FileOutputStream fos = new FileOutputStream("C:\\Users\\anton\\DownloadsA_A.exo");
+			PrintWriter pt = new PrintWriter(filepath);
+			pt.print(finalResponse);
+			pt.print(System.lineSeparator());
+			pt.print("Score : "+finalText.getMotTrouves()+"/"+finalText.getNbmots());
+			pt.print(System.lineSeparator());
+			pt.print("Casse : "+(casse ? 1 : 0));
+			pt.print(System.lineSeparator());
+			pt.print("Remplacement partiel : "+(partiel ? 1 : 0));
+			pt.print(System.lineSeparator());
+			pt.print("Autorisation de la solution : "+(allowSol ? 1 : 0));
+			pt.print(System.lineSeparator());
+			pt.print("Autorisation de l'affichage des statistiques : "+(allowStat ? 1 : 0));
+			pt.print(System.lineSeparator());
+			pt.print("Mode évaluation : "+(mode_eval ? 1 : 0));
+			pt.close();
 		}
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Confirmation");
+		alert.setHeaderText("Votre fichier a bien été enregistré");
+		alert.setContentText("Votre fichier a été enregistré à l'emplacement suivant : "+filepath);
+		Parent root = FXMLLoader.load(getClass().getResource("/view/AppEtu.fxml"));
+		Stage thisStage = (Stage) Main.actualRoot.getScene().getWindow();
+		Main.actualRoot=root;
+		Scene next = new Scene(root,Main.width,Main.height);
+		thisStage.setScene(next);
+		stage.close();
 	}
 
 }

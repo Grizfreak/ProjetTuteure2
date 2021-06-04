@@ -268,6 +268,7 @@ public class MediaController implements Initializable {
 		Parent saved = FXMLLoader.load(getClass().getResource("/view/PopupSave.fxml"));
 		Scene save = new Scene(saved);
 		Stage saving = new Stage();
+		SaveController.stage=saving;
 		saving.initModality(Modality.APPLICATION_MODAL);
 		saving.setScene(save);
 		saving.show();

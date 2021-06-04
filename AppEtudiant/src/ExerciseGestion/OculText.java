@@ -1,5 +1,8 @@
 package ExerciseGestion;
 import java.util.HashMap;
+
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 public class OculText {
 	private String text;
 	private String textCache="";
@@ -209,6 +212,9 @@ public int getMotTrouves() {
 
 public void setFinished(boolean isFinished) {
 	this.isFinished = isFinished;
+}
+
+public void generateSolution() {
 }
 
 
