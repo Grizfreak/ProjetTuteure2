@@ -13,7 +13,6 @@ public class OculText {
 	private boolean isFinished=false;
 	private HashMap<String, Integer> wordMap;
 	private static int endouble=0;
-	private int nblignesaut=0;
 	private boolean found=false;
 	private boolean casse=true;
 	private boolean partiel =true;

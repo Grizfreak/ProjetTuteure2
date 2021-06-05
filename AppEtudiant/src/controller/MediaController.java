@@ -32,8 +32,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -430,9 +428,6 @@ public class MediaController implements Initializable {
 		saving.setScene(save);
 		saving.show();
 	}
-	//TODO Dark mode
-	//TODO Interface plus propre
-	//TODO vérif Balsamik
 
 	private static String formatTime(Duration elapsed, Duration duration) {
 		   int intElapsed = (int)Math.floor(elapsed.toSeconds());

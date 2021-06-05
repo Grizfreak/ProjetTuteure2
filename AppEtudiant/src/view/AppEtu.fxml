@@ -49,12 +49,12 @@
             </ImageView>
             <TextFlow prefHeight="200.0" prefWidth="544.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reconstitution est une application ayant pour ambition de modifer la manière d'aborder l'apprentissage de l'anglais." textAlignment="CENTER" wrappingWidth="637.642578125">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reconstitution est une application ayant pour ambition de modifer la manière d'aborder l'apprentissage de l'anglais. Elle a été réalisé par des étudiants du Département Informatique de l'IUT de Laval." textAlignment="CENTER" wrappingWidth="637.642578125">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reconstitution est une propriété de Le Mans Université" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="                                                                             Reconstitution est une propriété de Le Mans Université. Tous droits réservés. " />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="637.642578125">
                      <font>
                         <Font size="20.0" />

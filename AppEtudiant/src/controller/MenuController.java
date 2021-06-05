@@ -41,15 +41,18 @@ public class MenuController implements Initializable {
 		while(bf.ready()) {
 			if(bf.readLine().contains("ID3")) {
 				ismp3=true;
+				bf.close();
 				Parent root = FXMLLoader.load(getClass().getResource("/view/OpenDocEtump3.fxml"));
 				changeScene(root);
 				return;
 			}
 			else {
+				bf.close();
 				Parent root = FXMLLoader.load(getClass().getResource("/view/OpenDocEtu.fxml"));
 				changeScene(root);
 				return;
 			}
+			
 		}
 	}
 	private void changeScene (Parent root) {

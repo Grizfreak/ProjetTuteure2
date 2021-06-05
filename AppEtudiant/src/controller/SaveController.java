@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
@@ -9,7 +8,6 @@ import java.util.ResourceBundle;
 
 import ExerciseGestion.OculText;
 import application.Main;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,8 +27,6 @@ public class SaveController implements Initializable {
 	@FXML private TextField fileName;
 	@FXML private Button done;
 	private OculText finalText;
-	private int nbMotTrouve;
-	private int nbMot;
 	private String finalResponse;
 	private boolean casse=false;
 	private boolean partiel =false;
@@ -51,8 +47,6 @@ public class SaveController implements Initializable {
 		this.mode_eval=MediaController.mode_eval;
 		finalText=MediaController.text;
 		finalResponse=finalText.getTextCache();
-		nbMot=finalText.getNbmots();
-		nbMotTrouve=finalText.getMotTrouves();
 		minTime=MediaController.minFinalTime;
 		secTime=MediaController.secFinalTime;
 	}
