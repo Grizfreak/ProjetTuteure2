@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<BorderPane stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
+<BorderPane styleClass="BorderPane" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -27,7 +27,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Aide">
             <items>
-                  <MenuItem disable="true" mnemonicParsing="false" text="Tutoriel" />
+                  <MenuItem mnemonicParsing="false" text="Tutoriel" />
             </items>
           </Menu>
         </menus>

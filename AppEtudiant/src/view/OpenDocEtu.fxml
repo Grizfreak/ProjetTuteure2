@@ -18,24 +18,24 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MediaController">
+<BorderPane styleClass="BorderedPane" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MediaController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Fichier">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-                  <MenuItem mnemonicParsing="false" onAction="#openSave" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#openSave" text="Sauvegarder" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Bonus">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="Afficher la solution" />
+                  <MenuItem mnemonicParsing="false" text="Afficher les stats" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" text="Aide">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" text="Tutoriel" />
             </items>
           </Menu>
         </menus>
@@ -69,12 +69,19 @@
                </font>
             </Label>
             <Slider fx:id="volumeSlider" disable="true" orientation="VERTICAL" visible="false" />
-            <Pane prefHeight="48.0" prefWidth="720.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Le but de l'exercice est d'écouter la vidéo et de retrouver les mots et de les écrire à droite">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
+            <Label text="Score actuel :">
+               <padding>
+                  <Insets top="100.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
          </children>
          <padding>
             <Insets left="30.0" right="30.0" top="50.0" />

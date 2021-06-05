@@ -23,8 +23,9 @@ public class StatsController implements Initializable{
 	@FXML private Label score;
 	@FXML private Button save;
 	private OculText text;
+	protected static Stage stage;
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {	
+	public void initialize(URL arg0, ResourceBundle arg1) {
 		text=MediaController.getText();
 		eleve.setText(text.getTextCache());
 		solution.setText(text.displayText());
@@ -39,6 +40,7 @@ public class StatsController implements Initializable{
 		saving.initModality(Modality.APPLICATION_MODAL);
 		saving.setScene(save);
 		saving.show();
+		stage.close();
 	}
 
 }

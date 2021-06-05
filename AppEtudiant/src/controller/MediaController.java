@@ -245,6 +245,7 @@ public class MediaController implements Initializable {
 			helpopened=true;
 		}
 	}
+
 	@FXML public void showVolume() throws IOException{
 		if(volumeopened) {
 			volumeSlider.setVisible(false); 
@@ -422,6 +423,7 @@ public class MediaController implements Initializable {
 		Parent saved = FXMLLoader.load(getClass().getResource("/view/Stats.fxml"));
 		Scene save = new Scene(saved);
 		Stage saving = new Stage();
+		StatsController.stage=saving;
 		saving.initStyle(StageStyle.UTILITY);
 		saving.initModality(Modality.APPLICATION_MODAL);
 		saving.setScene(save);
