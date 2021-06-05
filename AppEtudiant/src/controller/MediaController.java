@@ -25,6 +25,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -51,12 +53,17 @@ public class MediaController implements Initializable {
 	@FXML private Slider timeSlider;
 	@FXML private Slider volumeSlider;
 	@FXML private TextArea TextQuestion;
+	@FXML private Menu bonusmenu;
+	@FXML private MenuItem afficheSol;
+	@FXML private MenuItem afficheStat;
 	@FXML private TextField response;
 	@FXML private TextArea aide_text;
 	@FXML private Label videoTime;
 	@FXML private Button helpButton;
+	@FXML private MenuItem save;
 	@FXML private Label responseTextDisplay;
 	@FXML private ImageView responseDisplay;
+	@FXML private Label score;
 	private MediaPlayer mp;
 	private Media me; 
 	private Integer minTime;
@@ -166,6 +173,13 @@ public class MediaController implements Initializable {
 		}
 		bf.close();
 		fis.close();
+		if(mode_eval) {
+			bonusmenu.setVisible(false); 
+			save.setDisable(true);
+		}
+		else bonusmenu.setDisable(false);
+		if(!allowSol)afficheSol.setDisable(true);
+		if(!allowStat)afficheStat.setDisable(true);
 		FileInputStream fas = new FileInputStream(f);
 		FileOutputStream fos = new FileOutputStream(tmpFile);
 		int nb=0;
@@ -194,7 +208,10 @@ public class MediaController implements Initializable {
 		timeSlider.setDisable(false);
 		volumeSlider.setDisable(false);
 		videoTime.setVisible(true);
-		helpButton.setVisible(true);;
+		helpButton.setVisible(true);
+		if(!allowStat) {
+			score.setVisible(false);
+		}
 		timer.setText("Temps restant : " + minTime.toString()+":"+secTime.toString()+"s");
 		handleTime();
 
@@ -231,7 +248,6 @@ public class MediaController implements Initializable {
 
 	@FXML public void gotoHelp() throws IOException {
 		if(helpopened) {
-			TextQuestion.setDisable(false);
 			response.setDisable(false);
 			responsebox.setDisable(false);
 			aide_text.setVisible(false);
@@ -396,6 +412,9 @@ public class MediaController implements Initializable {
 			responseTextDisplay.setVisible(true);
 			responseDisplay.setImage(new Image(getClass().getResource("/images/green_check.png").toString()));
 			responseTextDisplay.setText("Bravo ! le mot est validé");
+		}
+		if(score.isVisible()) {
+			score.setText("Score actuel : "+text.getMotTrouves()+"/"+text.getNbmots());
 		}
 		TextQuestion.setText(text.getTextCache());
 		response.setText("");

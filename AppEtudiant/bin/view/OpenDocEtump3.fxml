@@ -24,13 +24,13 @@
         <menus>
           <Menu mnemonicParsing="false" text="Fichier">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#openSave" text="Sauvegarder" />
+                  <MenuItem fx:id="save" mnemonicParsing="false" onAction="#openSave" text="Sauvegarder" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Bonus">
+          <Menu fx:id="bonusmenu" disable="true" mnemonicParsing="false" text="Bonus">
             <items>
-              <MenuItem mnemonicParsing="false" text="Afficher la solution" />
-                  <MenuItem mnemonicParsing="false" text="Afficher les stats" />
+              <MenuItem fx:id="afficheSol" mnemonicParsing="false" text="Afficher la solution" />
+                  <MenuItem fx:id="afficheStat" mnemonicParsing="false" text="Afficher les stats" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Aide">
@@ -75,7 +75,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Label text="Score actuel :">
+            <Label fx:id="score" text="Score actuel :">
                <padding>
                   <Insets top="100.0" />
                </padding>
