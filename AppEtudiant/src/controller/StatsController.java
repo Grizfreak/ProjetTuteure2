@@ -29,6 +29,7 @@ public class StatsController implements Initializable{
 		Parent saved = FXMLLoader.load(getClass().getResource("/view/PopupSave.fxml"));
 		Scene save = new Scene(saved);
 		Stage saving = new Stage();
+		SaveController.stage=saving;
 		saving.initStyle(StageStyle.UNDECORATED);
 		saving.initModality(Modality.APPLICATION_MODAL);
 		saving.setScene(save);

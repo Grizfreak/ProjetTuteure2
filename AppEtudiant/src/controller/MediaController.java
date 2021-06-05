@@ -335,7 +335,10 @@ public class MediaController implements Initializable {
 							secTime=59;
 						}
 						// update timerLabel
-						timer.setText("Temps restant : " + minTime.toString()+":"+secTime.toString()+"s");
+						if(secTime<10) {
+							 timer.setText("Temps restant : " + minTime.toString()+":0"+secTime.toString()+"s");
+						}
+						else timer.setText("Temps restant : " + minTime.toString()+":"+secTime.toString()+"s");
 						if (secTime <= 0 && minTime <=0) {
 							timeline.stop();
 							try {
@@ -363,7 +366,10 @@ public class MediaController implements Initializable {
 					public void handle(ActionEvent arg0) {
 						secTime++;
 						// update timerLabel
-						timer.setText("Temps restant : " + minTime.toString()+":"+secTime.toString()+"s");
+						if(secTime<10) {
+							 timer.setText("Temps écoulé : " + minTime.toString()+":0"+secTime.toString()+"s");
+						}
+						else timer.setText("Temps écoulé : " + minTime.toString()+":"+secTime.toString()+"s");
 						if (helpopened) {
 							timeline.stop();
 						}

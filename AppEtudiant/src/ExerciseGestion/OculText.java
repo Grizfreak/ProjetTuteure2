@@ -77,6 +77,12 @@ public class OculText {
 		System.out.println("Valeur clé :"+keys+"|valeur mot :"+wordMap.get(keys)+"|valeur fin mot :" +(keys.length()-1+wordMap.get(keys).intValue()));
 	}
 }
+	
+public String displayText() {
+	String textAffiche;
+	textAffiche=text.replaceAll("@ ", System.lineSeparator());
+	return textAffiche;
+}
 
 public String getText() {
 	return text;

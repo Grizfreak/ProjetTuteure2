@@ -6,12 +6,13 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
 <BorderPane stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
    <top>
@@ -24,36 +25,59 @@
                   <MenuItem mnemonicParsing="false" onAction="#exit" text="Quitter" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Options">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Changer le thème" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem disable="true" mnemonicParsing="false" text="Bonus..." />
-            </items>
-          </Menu>
           <Menu mnemonicParsing="false" text="Aide">
             <items>
                   <MenuItem disable="true" mnemonicParsing="false" text="Tutoriel" />
-              <MenuItem mnemonicParsing="false" text="A propos" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
    </top>
    <left>
-      <VBox alignment="CENTER" prefHeight="579.0" prefWidth="219.0" BorderPane.alignment="CENTER" />
+      <VBox alignment="CENTER" prefHeight="579.0" prefWidth="219.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets right="50.0" />
+         </BorderPane.margin>
+         <children>
+            <ImageView fitHeight="139.0" fitWidth="139.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/887997.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="30.0" left="250.0" right="200.0" />
+               </VBox.margin>
+            </ImageView>
+            <TextFlow prefHeight="200.0" prefWidth="544.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reconstitution est une application ayant pour ambition de modifer la manière d'aborder l'apprentissage de l'anglais." textAlignment="CENTER" wrappingWidth="637.642578125">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reconstitution est une propriété de Le Mans Université" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="637.642578125">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets left="30.0" right="30.0" />
+               </VBox.margin>
+            </TextFlow>
+         </children></VBox>
    </left>
    <center>
       <VBox alignment="CENTER">
          <children>
             <Label text="Bienvenue dans Reconstitution" textAlignment="CENTER">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="30.0" />
                </font>
             </Label>
             <Label text="Version Etudiante">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
             <Label text="Pour commencer veuillez ouvrir un fichier">
@@ -61,7 +85,7 @@
                   <Insets top="120.0" />
                </VBox.margin>
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
             <ImageView fitHeight="350.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
@@ -74,7 +98,7 @@
             </ImageView>
             <Label text="Vous pouvez glisser-déposer votre fichier ici">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <VBox.margin>
                   <Insets top="250.0" />
@@ -95,6 +119,19 @@
       </VBox>
    </center>
    <right>
-      <VBox alignment="CENTER" prefHeight="579.0" prefWidth="179.0" BorderPane.alignment="CENTER" />
+      <VBox alignment="CENTER" prefHeight="579.0" prefWidth="179.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="224.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="-870.0" left="500.0" />
+               </VBox.margin>
+               <image>
+                  <Image url="@../images/banniere_iut.png" />
+               </image>
+            </ImageView>
+         </children>
+         <BorderPane.margin>
+            <Insets left="50.0" />
+         </BorderPane.margin></VBox>
    </right>
 </BorderPane>

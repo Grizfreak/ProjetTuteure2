@@ -53,6 +53,8 @@ public class SaveController implements Initializable {
 		finalResponse=finalText.getTextCache();
 		nbMot=finalText.getNbmots();
 		nbMotTrouve=finalText.getMotTrouves();
+		minTime=MediaController.minFinalTime;
+		secTime=MediaController.secFinalTime;
 	}
 	@FXML public void choosePath() {
 		DirectoryChooser dc = new DirectoryChooser();
