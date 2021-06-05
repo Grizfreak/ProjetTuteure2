@@ -34,8 +34,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.media.MediaPlayer.Status;
+import javafx.scene.media.MediaView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -172,7 +172,6 @@ public class MediaController implements Initializable {
 		byte[] bytes = fas.readNBytes(mediaLength);
 		fos.write(bytes);
 		System.out.println("g fini de lire");
-
 		String path = tmpFile.getAbsolutePath();
 		System.out.println(path);
 		me = new Media(new File(path).toURI().toString());
@@ -198,7 +197,7 @@ public class MediaController implements Initializable {
 		helpButton.setVisible(true);;
 		timer.setText("Temps restant : " + minTime.toString()+":"+secTime.toString()+"s");
 		handleTime();
-		
+
 		videoTime.setText("Video : "+formatTime(mp.getCurrentTime(), me.getDuration()));
 		response.addEventFilter(KeyEvent.KEY_RELEASED, keyEvent -> {
 			if(keyEvent.getCode() == KeyCode.ENTER)
@@ -269,7 +268,7 @@ public class MediaController implements Initializable {
 		timeline.stop();
 		minFinalTime=minTime;
 		secFinalTime=secTime;
-		
+
 	}
 	@FXML public void openSave() throws IOException {
 		pause();
@@ -334,7 +333,7 @@ public class MediaController implements Initializable {
 						}
 						// update timerLabel
 						if(secTime<10) {
-							 timer.setText("Temps restant : " + minTime.toString()+":0"+secTime.toString()+"s");
+							timer.setText("Temps restant : " + minTime.toString()+":0"+secTime.toString()+"s");
 						}
 						else timer.setText("Temps restant : " + minTime.toString()+":"+secTime.toString()+"s");
 						if (secTime <= 0 && minTime <=0) {
@@ -365,7 +364,7 @@ public class MediaController implements Initializable {
 						secTime++;
 						// update timerLabel
 						if(secTime<10) {
-							 timer.setText("Temps écoulé : " + minTime.toString()+":0"+secTime.toString()+"s");
+							timer.setText("Temps écoulé : " + minTime.toString()+":0"+secTime.toString()+"s");
 						}
 						else timer.setText("Temps écoulé : " + minTime.toString()+":"+secTime.toString()+"s");
 						if (helpopened) {
@@ -404,20 +403,20 @@ public class MediaController implements Initializable {
 			openStats();
 		}
 	}
-	
+
 	@FXML private void return10sec() {
 		mp.seek(mp.getCurrentTime().subtract(Duration.seconds(10)));
 	}
-	
+
 	@FXML private void skip10sec() {
 		mp.seek(mp.getCurrentTime().add(Duration.seconds(10)));
 	}
-	
+
 	@FXML private void showSolution() {
 		response.setDisable(true);
 		TextQuestion.setText(text.getText());
 	}
-	
+
 	public void openStats() throws IOException {
 		pause();
 		Parent saved = FXMLLoader.load(getClass().getResource("/view/Stats.fxml"));
@@ -430,41 +429,41 @@ public class MediaController implements Initializable {
 	}
 
 	private static String formatTime(Duration elapsed, Duration duration) {
-		   int intElapsed = (int)Math.floor(elapsed.toSeconds());
-		   int elapsedHours = intElapsed / (60 * 60);
-		   if (elapsedHours > 0) {
-		       intElapsed -= elapsedHours * 60 * 60;
-		   }
-		   int elapsedMinutes = intElapsed / 60;
-		   int elapsedSeconds = intElapsed - elapsedHours * 60 * 60 
-		                           - elapsedMinutes * 60;
-		 
-		   if (duration.greaterThan(Duration.ZERO)) {
-		      int intDuration = (int)Math.floor(duration.toSeconds());
-		      int durationHours = intDuration / (60 * 60);
-		      if (durationHours > 0) {
-		         intDuration -= durationHours * 60 * 60;
-		      }
-		      int durationMinutes = intDuration / 60;
-		      int durationSeconds = intDuration - durationHours * 60 * 60 - 
-		          durationMinutes * 60;
-		      if (durationHours > 0) {
-		         return String.format("%d:%02d:%02d/%d:%02d:%02d", 
-		            elapsedHours, elapsedMinutes, elapsedSeconds,
-		            durationHours, durationMinutes, durationSeconds);
-		      } else {
-		          return String.format("%02d:%02d/%02d:%02d",
-		            elapsedMinutes, elapsedSeconds,durationMinutes, 
-		                durationSeconds);
-		      }
-		      } else {
-		          if (elapsedHours > 0) {
-		             return String.format("%d:%02d:%02d", elapsedHours, 
-		                    elapsedMinutes, elapsedSeconds);
-		            } else {
-		                return String.format("%02d:%02d",elapsedMinutes, 
-		                    elapsedSeconds);
-		            }
-		        }
-		    }
+		int intElapsed = (int)Math.floor(elapsed.toSeconds());
+		int elapsedHours = intElapsed / (60 * 60);
+		if (elapsedHours > 0) {
+			intElapsed -= elapsedHours * 60 * 60;
+		}
+		int elapsedMinutes = intElapsed / 60;
+		int elapsedSeconds = intElapsed - elapsedHours * 60 * 60 
+				- elapsedMinutes * 60;
+
+		if (duration.greaterThan(Duration.ZERO)) {
+			int intDuration = (int)Math.floor(duration.toSeconds());
+			int durationHours = intDuration / (60 * 60);
+			if (durationHours > 0) {
+				intDuration -= durationHours * 60 * 60;
+			}
+			int durationMinutes = intDuration / 60;
+			int durationSeconds = intDuration - durationHours * 60 * 60 - 
+					durationMinutes * 60;
+			if (durationHours > 0) {
+				return String.format("%d:%02d:%02d/%d:%02d:%02d", 
+						elapsedHours, elapsedMinutes, elapsedSeconds,
+						durationHours, durationMinutes, durationSeconds);
+			} else {
+				return String.format("%02d:%02d/%02d:%02d",
+						elapsedMinutes, elapsedSeconds,durationMinutes, 
+						durationSeconds);
+			}
+		} else {
+			if (elapsedHours > 0) {
+				return String.format("%d:%02d:%02d", elapsedHours, 
+						elapsedMinutes, elapsedSeconds);
+			} else {
+				return String.format("%02d:%02d",elapsedMinutes, 
+						elapsedSeconds);
+			}
+		}
+	}
 }
