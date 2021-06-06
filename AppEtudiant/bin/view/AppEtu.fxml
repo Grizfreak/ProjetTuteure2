@@ -54,7 +54,7 @@
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="                                                                             Reconstitution est une propriété de Le Mans Université. Tous droits réservés. " />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="                                                                                                                                                  Reconstitution est une propriété de Le Mans Université. Tous droits réservés.                     Copyrights : LAMBERT Matéo / KA Nathanäel / CHERON Ludovic / AUBERT Antonin" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="637.642578125">
                      <font>
                         <Font size="20.0" />
@@ -90,7 +90,7 @@
             </Label>
             <ImageView fitHeight="350.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../logo-symbol-language-interpretation-old-english-area.png" />
+                  <Image url="@../images/logo-symbol-language-interpretation-old-english-area.png" />
                </image>
                <VBox.margin>
                   <Insets top="80.0" />
@@ -106,7 +106,7 @@
             </Label>
             <ImageView fitHeight="79.0" nodeOrientation="INHERIT" onDragDropped="#Drop" onDragOver="#onDragOver" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../download-logo.png" />
+                  <Image url="@../images/download-logo.png" />
                </image>
                <viewport>
                   <Rectangle2D />
@@ -121,9 +121,21 @@
    <right>
       <VBox alignment="CENTER" prefHeight="579.0" prefWidth="179.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="224.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+            <TextFlow prefHeight="200.0" prefWidth="544.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Les seuls fichiers supportés sont en &quot;.ang&quot;, ils sont édités par l'application nommée Reconstitution Enseignant. Les fichiers enregistrés à la fin de votre exercice contiennent toutes les informations permettant la notation et sont lisibles sous n'importe quel éditeur de texte." textAlignment="CENTER" wrappingWidth="637.642578125">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+               </children>
                <VBox.margin>
-                  <Insets bottom="-870.0" left="500.0" />
+                  <Insets top="480.0" />
+               </VBox.margin>
+            </TextFlow>
+            <ImageView fitHeight="224.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets left="500.0" top="200.0" />
                </VBox.margin>
                <image>
                   <Image url="@../images/banniere_iut.png" />

@@ -119,7 +119,7 @@
                </children></Pane>
             <Pane fx:id="help" prefHeight="239.0" prefWidth="593.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#gotoHelp" text="Aide" />
+                  <Button fx:id="helpButton" mnemonicParsing="false" onAction="#gotoHelp" text="Aide" />
                   <TextArea fx:id="aide_text" disable="true" editable="false" layoutY="39.0" prefHeight="200.0" prefWidth="401.0" style="-fx-wrap-text: true;" text="Aide du professeur" visible="false" />
                </children>
                <VBox.margin>

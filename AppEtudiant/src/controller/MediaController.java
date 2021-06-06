@@ -152,11 +152,17 @@ public class MediaController implements Initializable {
 					allowSol=true;
 			}
 			if(bfLine.contains("Time:")) {
-				minTime=Integer.parseInt(bfLine.substring(6,8));
-				System.out.println(minTime);
-				if(bfLine.contains("00")) {
-					secTime=0;
+				if(bfLine.contains("null")) {
+					
 				}
+				else{
+					minTime=Integer.parseInt(bfLine.substring(6,8));
+					System.out.println(minTime);
+					if(bfLine.contains("00")) {
+						secTime=0;
+					}
+				}
+				
 			}
 			if(bfLine.contains("Casse:")) {
 				if(bfLine.contains("1"))
@@ -212,8 +218,7 @@ public class MediaController implements Initializable {
 		if(!allowStat) {
 			score.setVisible(false);
 		}
-		timer.setText("Temps restant : " + minTime.toString()+":"+secTime.toString()+"s");
-		handleTime();
+		
 
 		videoTime.setText("Video : "+formatTime(mp.getCurrentTime(), me.getDuration()));
 		response.addEventFilter(KeyEvent.KEY_RELEASED, keyEvent -> {
@@ -237,6 +242,8 @@ public class MediaController implements Initializable {
 			stopWatchCreation();
 		}
 		//*******************************************************ICI SE TROUVENT LES FONCTIONS CHRONO et TIMER************************************//
+		timer.setText("Temps restant : " + minTime.toString()+":"+secTime.toString()+"s");
+		handleTime();
 		volumeSlider.setValue(mp.getVolume() * 100);
 		volumeSlider.valueProperty().addListener(new InvalidationListener() {
 			@Override

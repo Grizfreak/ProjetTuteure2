@@ -15,12 +15,12 @@
       <Text layoutX="300.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom" />
       <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="31.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../7fd2e46b2da9819e667fb75caf475cf7.png" />
+            <Image url="/images/7fd2e46b2da9819e667fb75caf475cf7.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="31.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../folder.png" />
+            <Image url="/images/folder.png" />
          </image>
       </ImageView>
       <TextField fx:id="fileName" disable="true" layoutX="114.0" layoutY="228.0" prefHeight="26.0" prefWidth="412.0" style="-fx-background-color: EDECEC;" />
