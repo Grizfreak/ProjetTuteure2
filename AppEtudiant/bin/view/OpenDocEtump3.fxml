@@ -95,7 +95,7 @@
    <right>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="TextQuestion" disable="true" prefHeight="330.0" prefWidth="593.0" style="-fx-wrap-text: true;">
+            <TextArea fx:id="TextQuestion" editable="false" prefHeight="330.0" prefWidth="593.0" style="-fx-wrap-text: true;">
                <font>
                   <Font size="25.0" />
                </font></TextArea>

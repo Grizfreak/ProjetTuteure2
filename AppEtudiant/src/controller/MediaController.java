@@ -260,6 +260,7 @@ public class MediaController implements Initializable {
 
 	@FXML public void gotoHelp() throws IOException {
 		if(helpopened) {
+			TextQuestion.setDisable(false);
 			response.setDisable(false);
 			responsebox.setDisable(false);
 			aide_text.setVisible(false);
@@ -267,6 +268,7 @@ public class MediaController implements Initializable {
 		}
 		else {
 			TextQuestion.setDisable(true);
+			aide_text.setEditable(false);
 			response.setDisable(true);
 			responsebox.setDisable(true);
 			aide_text.setVisible(true);
