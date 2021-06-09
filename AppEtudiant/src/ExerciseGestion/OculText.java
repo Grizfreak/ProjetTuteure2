@@ -1,11 +1,9 @@
 package ExerciseGestion;
 import java.util.HashMap;
-
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 public class OculText {
 	private String text;
 	private String textCache="";
+	@SuppressWarnings("unused")
 	private String aide;
 	private char occultation='#';
 	private int nbmots=0;
@@ -13,6 +11,7 @@ public class OculText {
 	private boolean isFinished=false;
 	private HashMap<String, Integer> wordMap;
 	private static int endouble=0;
+	@SuppressWarnings("unused")
 	private boolean found=false;
 	private boolean casse=true;
 	private boolean partiel =true;

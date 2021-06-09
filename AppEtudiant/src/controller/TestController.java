@@ -31,6 +31,7 @@ public class TestController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 	}
+	@SuppressWarnings("resource")
 	@FXML private void openFile() throws IOException {
 		 
 		System.out.println("Opening..");

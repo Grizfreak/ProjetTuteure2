@@ -45,6 +45,7 @@ public class MenuController implements Initializable {
 		f = fc.showOpenDialog(null);
 		openFile(f);
 	}
+	@SuppressWarnings("resource")
 	private void openFile(File f) throws IOException {
 		BufferedReader bf = new BufferedReader(new FileReader(f));
 		while(bf.ready()) {

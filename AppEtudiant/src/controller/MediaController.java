@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -116,6 +115,7 @@ public class MediaController implements Initializable {
 		return text;
 	}
 
+	@SuppressWarnings({ "resource", "unused" })
 	public void launchexo() throws IOException {
 		FileInputStream fis = new FileInputStream(f);
 		BufferedReader bf = new BufferedReader(new FileReader(f));
