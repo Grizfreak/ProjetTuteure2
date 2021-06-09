@@ -16,6 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -27,6 +29,8 @@ public class SaveController implements Initializable {
 	@FXML private TextField fileName;
 	@FXML private Button done;
 	private OculText finalText;
+	@FXML private ImageView file;
+	@FXML private ImageView folder;
 	private String finalResponse;
 	private boolean casse=false;
 	private boolean partiel =false;
@@ -39,7 +43,8 @@ public class SaveController implements Initializable {
 	public static Stage stage;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+		file.setImage(new Image(getClass().getResource("/images/7fd2e46b2da9819e667fb75caf475cf7.png").toString()));
+		folder.setImage(new Image(getClass().getResource("/images/folder.png").toString()));
 		this.casse=MediaController.casse;
 		this.partiel=MediaController.partiel;
 		this.allowSol=MediaController.allowSol;

@@ -7,7 +7,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import ExerciseGestion.OculText;
@@ -23,7 +25,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -49,6 +54,7 @@ public class MediaController implements Initializable {
 	@FXML private Button playPause;
 	@FXML private Button responsebox;
 	@FXML private Button launch;
+	@FXML private ImageView sound;
 	@FXML private Label timer;
 	@FXML private Slider timeSlider;
 	@FXML private Slider volumeSlider;
@@ -87,7 +93,9 @@ public class MediaController implements Initializable {
 	public static boolean mode_eval=false;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1){
+		score.setVisible(false);
 		f=MenuController.f;
+		sound.setImage(new Image(getClass().getResource("/images/png-clipart-computer-icons-sound-sound-logo-monochrome.png").toString()));
 		try {
 			if(MenuController.ismp3) {
 				tmpFile = File.createTempFile("media", ".mp3");
@@ -141,7 +149,7 @@ public class MediaController implements Initializable {
 			}
 			if(bfLine.contains("AffichR:")) {
 				if(bfLine.contains("1"))
-					allowSol=true;
+					allowStat=true;
 			}
 			if(bfLine.contains("RemplacementP:")) {
 				if(bfLine.contains("1"))
@@ -153,7 +161,7 @@ public class MediaController implements Initializable {
 			}
 			if(bfLine.contains("Time:")) {
 				if(bfLine.contains("null")) {
-					
+
 				}
 				else{
 					minTime=Integer.parseInt(bfLine.substring(6,8));
@@ -162,7 +170,7 @@ public class MediaController implements Initializable {
 						secTime=0;
 					}
 				}
-				
+
 			}
 			if(bfLine.contains("Casse:")) {
 				if(bfLine.contains("1"))
@@ -215,10 +223,7 @@ public class MediaController implements Initializable {
 		volumeSlider.setDisable(false);
 		videoTime.setVisible(true);
 		helpButton.setVisible(true);
-		if(!allowStat) {
-			score.setVisible(false);
-		}
-		
+
 
 		videoTime.setText("Video : "+formatTime(mp.getCurrentTime(), me.getDuration()));
 		response.addEventFilter(KeyEvent.KEY_RELEASED, keyEvent -> {
@@ -439,9 +444,26 @@ public class MediaController implements Initializable {
 		mp.seek(mp.getCurrentTime().add(Duration.seconds(10)));
 	}
 
-	@FXML private void showSolution() {
-		response.setDisable(true);
-		TextQuestion.setText(text.getText());
+	@FXML private void showSolution() throws IOException {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmation");
+		alert.setHeaderText("Souhaitez-vous terminer l'exercice et voir la solution ?");
+
+		ButtonType confirm = new ButtonType("Oui");
+		ButtonType cancel = new ButtonType("Annuler");
+
+		// Remove default ButtonTypes
+		alert.getButtonTypes().clear();
+
+		alert.getButtonTypes().addAll(confirm, cancel);
+
+		// option != null.
+		Optional<ButtonType> option = alert.showAndWait();
+		if (option.get() == confirm) {
+			openStats();
+		} else if (option.get() == cancel) {
+		}
+		
 	}
 
 	public void openStats() throws IOException {
@@ -454,6 +476,12 @@ public class MediaController implements Initializable {
 		saving.initModality(Modality.APPLICATION_MODAL);
 		saving.setScene(save);
 		saving.show();
+	}
+
+	@FXML private void showStats() {
+		score.setVisible(true);
+		score.setText("Score actuel : "+text.getMotTrouves()+"/"+text.getNbmots());
+		afficheStat.setDisable(true);
 	}
 
 	private static String formatTime(Duration elapsed, Duration duration) {

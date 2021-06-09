@@ -29,8 +29,8 @@
           </Menu>
           <Menu fx:id="bonusmenu" disable="true" mnemonicParsing="false" text="Bonus">
             <items>
-              <MenuItem fx:id="afficheSol" mnemonicParsing="false" text="Afficher la solution" />
-                  <MenuItem fx:id="afficheStat" mnemonicParsing="false" text="Afficher les stats" />
+              <MenuItem fx:id="afficheSol" mnemonicParsing="false" onAction="#showSolution" text="Afficher la solution" />
+                  <MenuItem fx:id="afficheStat" mnemonicParsing="false" onAction="#showStats" text="Afficher les stats" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Aide">
@@ -50,12 +50,12 @@
             <Pane>
                <children>
                   <Button fx:id="playPause" layoutX="241.0" layoutY="3.0" mnemonicParsing="false" onAction="#playOrPause" text="Pause" />
-                  <Button layoutX="504.0" layoutY="2.0" mnemonicParsing="false" onAction="#skip10sec" text="Button" />
-                  <Button layoutX="370.0" layoutY="2.0" mnemonicParsing="false" onAction="#return10sec" text="Button" />
+                  <Button layoutX="504.0" layoutY="2.0" mnemonicParsing="false" onAction="#skip10sec" text="&gt;&gt;10" />
+                  <Button layoutX="370.0" layoutY="2.0" mnemonicParsing="false" onAction="#return10sec" text="&lt;&lt;10" />
                   <Button fx:id="launch" layoutX="654.0" layoutY="3.0" mnemonicParsing="false" onAction="#launchexo" style="-fx-background-color: red;" text="Démarrer" />
-                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="-6.0" onMouseClicked="#showVolume" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="sound" fitHeight="40.0" fitWidth="40.0" layoutX="-6.0" onMouseClicked="#showVolume" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../png-clipart-computer-icons-sound-sound-logo-monochrome.png" />
+                        <Image url="@../images/png-clipart-computer-icons-sound-sound-logo-monochrome.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="videoTime" layoutX="68.0" layoutY="7.0" prefHeight="17.0" prefWidth="141.0" text="Video : 0.00/5.255" visible="false" />

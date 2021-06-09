@@ -15,6 +15,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
@@ -24,9 +26,16 @@ import javafx.stage.FileChooser.ExtensionFilter;
 public class MenuController implements Initializable {
 	public static File f;
 	public static boolean ismp3=false;
+	@FXML private ImageView logoiut;
+	@FXML private ImageView logoprinc;
+	@FXML private ImageView logofile;
+	@FXML private ImageView dragdrop;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		logoiut.setImage(new Image(getClass().getResource("/images/banniere_iut.png").toString()));
+		logoprinc.setImage(new Image(getClass().getResource("/images/logo-symbol-language-interpretation-old-english-area.png").toString()));
+		logofile.setImage(new Image(getClass().getResource("/images/887997.png").toString()));
+		dragdrop.setImage(new Image(getClass().getResource("/images/download-logo.png").toString()));
 	}
 	@FXML
 	public void searchFile() throws IOException {
@@ -59,6 +68,7 @@ public class MenuController implements Initializable {
 		Stage thisStage = (Stage) Main.actualRoot.getScene().getWindow();
 		Main.actualRoot=root;
 		Scene next = new Scene(root,Main.width,Main.height);
+		next.getStylesheets().add(getClass().getResource("/application/application.css").toString());
 		thisStage.setScene(next);
 
 	}

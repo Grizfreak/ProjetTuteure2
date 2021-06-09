@@ -39,7 +39,7 @@
             <Insets right="50.0" />
          </BorderPane.margin>
          <children>
-            <ImageView fitHeight="139.0" fitWidth="139.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logofile" fitHeight="139.0" fitWidth="139.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/887997.png" />
                </image>
@@ -88,7 +88,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <ImageView fitHeight="350.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logoprinc" fitHeight="350.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/logo-symbol-language-interpretation-old-english-area.png" />
                </image>
@@ -104,7 +104,7 @@
                   <Insets top="250.0" />
                </VBox.margin>
             </Label>
-            <ImageView fitHeight="79.0" nodeOrientation="INHERIT" onDragDropped="#Drop" onDragOver="#onDragOver" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="dragdrop" fitHeight="79.0" nodeOrientation="INHERIT" onDragDropped="#Drop" onDragOver="#onDragOver" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/download-logo.png" />
                </image>
@@ -133,7 +133,7 @@
                   <Insets top="480.0" />
                </VBox.margin>
             </TextFlow>
-            <ImageView fitHeight="224.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logoiut" fitHeight="224.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
                <VBox.margin>
                   <Insets left="500.0" top="200.0" />
                </VBox.margin>

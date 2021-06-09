@@ -23,6 +23,7 @@ public class Main extends Application {
 			Parent root = FXMLLoader.load(getClass().getResource("/view/AppEtu.fxml"));
 			actualRoot=root;
 			Scene scene = new Scene(root,width,height);
+			scene.getStylesheets().add(getClass().getResource("/application/application.css").toString());
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.show();
