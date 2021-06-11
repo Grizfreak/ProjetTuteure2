@@ -8,6 +8,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 
 
 public class Main extends Application {
@@ -24,6 +25,7 @@ public class Main extends Application {
 			actualRoot=root;
 			Scene scene = new Scene(root,width,height);
 			scene.getStylesheets().add(getClass().getResource("/application/application.css").toString());
+			primaryStage.getIcons().add(new Image(getClass().getResource("/images/logo-symbol-language-interpretation-old-english-area.png").toString()));
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.show();
