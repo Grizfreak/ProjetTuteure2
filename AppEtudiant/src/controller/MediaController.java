@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import ExerciseGestion.OculText;
+import application.Main;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.InvalidationListener;
@@ -255,6 +256,19 @@ public class MediaController implements Initializable {
 			public void invalidated(Observable observable) {
 				mp.setVolume(volumeSlider.getValue()/100);
 			}
+		});
+		Main.actualRoot.getScene().addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+
+			@Override
+			public void handle(KeyEvent arg0) {
+				if(arg0.getCode() == KeyCode.SPACE)playOrPause();
+				if(arg0.getCode() == KeyCode.RIGHT)skip10sec();
+				if(arg0.getCode() == KeyCode.LEFT)return10sec();
+				if(arg0.getCode() == KeyCode.UP)volumeSlider.setValue(volumeSlider.getValue()+10);
+				if(arg0.getCode() == KeyCode.DOWN)volumeSlider.setValue(volumeSlider.getValue()-10);;
+				
+			}
+			
 		});
 	}
 
