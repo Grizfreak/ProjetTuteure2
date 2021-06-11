@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -498,6 +501,9 @@ public class MediaController implements Initializable {
 		score.setVisible(true);
 		score.setText("Score actuel : "+text.getMotTrouves()+"/"+text.getNbmots());
 		afficheStat.setDisable(true);
+	}
+	@FXML public void gotoTuto() throws MalformedURLException, IOException, URISyntaxException {
+		Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1c6n0R5gJ0yDycuakt2MQ-LhVJZ7AuPJbn3NZLCKV4TQ/edit?usp=sharing").toURI());
 	}
 
 	private static String formatTime(Duration elapsed, Duration duration) {

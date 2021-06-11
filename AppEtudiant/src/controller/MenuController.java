@@ -1,12 +1,17 @@
 package controller;
 
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import com.sun.javafx.application.HostServicesDelegate;
 
 import application.Main;
 import javafx.application.Platform;
@@ -90,6 +95,9 @@ public class MenuController implements Initializable {
 		if (event.getDragboard().hasFiles()) {
 			event.acceptTransferModes(TransferMode.ANY);
 		}
+	}
+	@FXML public void gotoTuto() throws MalformedURLException, IOException, URISyntaxException {
+		Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1c6n0R5gJ0yDycuakt2MQ-LhVJZ7AuPJbn3NZLCKV4TQ/edit?usp=sharing").toURI());
 	}
 
 }
