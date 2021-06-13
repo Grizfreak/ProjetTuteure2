@@ -21,7 +21,6 @@
           <Menu mnemonicParsing="false" text="Fichier">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#searchFile" text="Ouvrir Fichier" />
-                  <MenuItem disable="true" mnemonicParsing="false" text="Enregistrer" />
                   <MenuItem mnemonicParsing="false" onAction="#exit" text="Quitter" />
             </items>
           </Menu>
