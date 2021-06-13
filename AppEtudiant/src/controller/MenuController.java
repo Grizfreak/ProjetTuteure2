@@ -10,9 +10,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import com.sun.javafx.application.HostServicesDelegate;
-
 import application.Main;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
