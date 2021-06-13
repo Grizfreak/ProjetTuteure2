@@ -196,7 +196,6 @@ public class MediaController implements Initializable {
 		fis.close();
 		if(mode_eval) {
 			bonusmenu.setVisible(false); 
-			save.setDisable(true);
 		}
 		else bonusmenu.setDisable(false);
 		if(!allowSol)afficheSol.setDisable(true);
@@ -322,6 +321,24 @@ public class MediaController implements Initializable {
 
 	}
 	@FXML public void openSave() throws IOException {
+		if(mode_eval) {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+		      alert.setTitle("Confirmation");
+		      alert.setHeaderText("Etes-vous sûr de vouloir arrêter l'exercice ?");
+		      alert.setContentText("Une fois l'exercice arrêté vous serez dans l'obligation de sauvegarder et vous ne pourrez plus revenir en arrière sur votre performance");
+		 
+		      // option != null.
+		      Optional<ButtonType> option = alert.showAndWait();
+		 
+		      if (option.get() == null) {
+		      } else if (option.get() == ButtonType.OK) {
+		    	  openStats();
+		    	  return;
+		      } else if (option.get() == ButtonType.CANCEL) {
+		    	  return;
+		      } else {
+		      }
+		   }
 		pause();
 		Parent saved = FXMLLoader.load(getClass().getResource("/view/PopupSave.fxml"));
 		Scene save = new Scene(saved);
